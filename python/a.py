@@ -13,9 +13,9 @@ for i in range(len(sys.argv)):
     #    sys.argv[i] = '"'+sys.argv[i]+'"'
     if ' ' in sys.argv[i]:
         sys.argv[i] = '"'+sys.argv[i]+'"'
-        
+
 if har(filename, sys.argv[1:]):
     exit()
-    
+
 from _write_scripts import *
 write_scripts()
