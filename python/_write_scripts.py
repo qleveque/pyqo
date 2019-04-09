@@ -6,10 +6,11 @@ from _reader import *
 
 PYTHON = os.path.dirname(os.path.abspath(__file__))
 SCRIPTS = os.path.join(PYTHON,'..','scripts')
+DATA = os.path.join(PYTHON,'..','data')
 
 particulars = {'c' :
-                {'windows' : 'call  %~dp0/_c.bat\n',
-                'linux' : ''}
+                {'windows' : 'call  {}/_c.bat\n'.format(SCRIPTS),
+                'linux' : 'source  {}/_c\n'.format(SCRIPTS)}
               }
 
 if sys.platform in ['linux', 'linux2']:
@@ -52,14 +53,16 @@ def write_scripts():
 
     for command in commands:
         file = os.path.join(SCRIPTS, command+ext)
-        with open(file, 'w', encoding = 'utf-8') as f:
+        with open(file, 'w+', encoding = 'utf-8') as f:
             f.write(script_content(command))
+        os.chmod(file, 0o777)
 
-    a_data = read_json('../data/a.json')
+    a_data = read_json(os.path.join(DATA,'a.json'))
     for key, value in a_data.items():
         file = os.path.join(SCRIPTS, key+ext)
-        with open(file, 'w', encoding = 'utf-8') as f:
+        with open(file, 'w+', encoding = 'utf-8') as f:
             f.write(a_script_content(value))
+        os.chmod(file, 0o777)
 
 if __name__ == '__main__':
     write_scripts()

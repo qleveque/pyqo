@@ -5,7 +5,6 @@ sys.path.append('python')
 from _write_scripts import *
 
 current_path = os.path.dirname(os.path.abspath(__file__))
-write_scripts()
 
 def addLines(filename, content, add):
 	with open(filename, "r+") as file:
@@ -21,15 +20,22 @@ if sys.platform in ['linux', 'linux2']:
 	add_profile = """
 #PYQ_START
 PATH="{}:$PATH"
-alias c='source c'
 #PYQ_END
 """.format(os.path.join(current_path,'scripts'))
 	addLines("{}/.profile".format(os.environ['HOME']), content_flag, add_profile)
 
+	add_bashrc = """
+#PYQ_START
+alias c='source c'
+#PYQ_END
+"""
+	addLines("{}/.bashrc".format(os.environ['HOME']), content_flag, add_bashrc)
+
 else:
 	#TODO
-	#pyq = os.path.join(current_path, 'batches')
+	#pyq = os.path.join(current_path, 'scripts')
 	#subprocess.call('setx /M PATH "%PATH%;{}"'.format(pyq), shell=True)
-	#config = os.path.join(current_path, 'windows_config')
-	#subprocess.call('setx /M PATH "%PATH%;{}"'.format(config), shell=True)
-	pass
+	print("You need to manually add the following folder to your PATH environment variable:")
+	print(os.path.join(current_path,'scripts'))
+
+write_scripts()

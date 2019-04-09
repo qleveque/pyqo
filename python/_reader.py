@@ -17,13 +17,18 @@ def har(filename, args, **kwargs):
     REMOVE = ['-r','--remove']
     if args[0] not in HELP+ADD+REMOVE:
         return False
-      
+
     data = read_json(filename)
-      
+
     if args[0] in HELP:
-        print(data)
+        if len(args)>=2:
+            if args[1] in data:
+                print(data[args[1]])
+        else:
+            from _printer import print_list
+            print_list(list(data))
         return True
-        
+
     if args[0] in ADD:
         if len(args)>=3:
             to_add = ' '.join(args[2:])
@@ -36,17 +41,17 @@ def har(filename, args, **kwargs):
         else:
             return True
         data[args[1]] = to_add
-        
+
     elif args[0] in REMOVE and len(args)>=2:
         if args[1] in data:
             data.pop(args[1])
-            
+
     with open(filename, 'w', encoding = 'utf-8') as f:
         json.dump(data, f)
-    
+
     return True
-        
-    
+
+
     if os.path.isfile(path):
         with open(path, encoding='utf-8') as f:
             data = json.loads(f.read())

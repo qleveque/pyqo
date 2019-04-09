@@ -14,7 +14,7 @@ if har(filename, sys.argv[1:]):
     exit()
 
 data = read_json(filename)
-    
+
 cmd = ''
 new_window = False
 incognito = False
@@ -38,8 +38,8 @@ if incognito:
 
 #make command
 if sys.platform in ['linux', 'linux2']:
-        cmd = 'chromium-browser '+cmd+" &> /dev/null"
+    cmd = 'chromium-browser '+cmd+' &'
 else:
     cmd = 'chrome '+cmd
-    
-subprocess.call(cmd, shell=True)
+
+subprocess.call(cmd, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
