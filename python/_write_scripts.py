@@ -39,7 +39,7 @@ python {}.py %*
         return r
 
     def a_script_content(command):
-        return "@{} %*".format(command)
+        return "@ {} %*".format(command)
 
 def write_scripts():
     if os.path.isdir(SCRIPTS):
