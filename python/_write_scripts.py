@@ -18,7 +18,7 @@ if sys.platform in ['linux', 'linux2']:
 
     def script_content(command) :
         r= """#!/bin/bash
-python3 {}.py $*
+python3 {}.py "$@"
 """.format(os.path.join(PYTHON,command))
         if command in particulars:
             r+=particulars[command]['linux']

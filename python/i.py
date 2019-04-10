@@ -13,7 +13,7 @@ if 'shared_dir' in config and config['shared_dir']!='':
 
 if har(filename, sys.argv[1:]):
     exit()
-    
+
 data = read_json(filename)
 
 cmd = ''
