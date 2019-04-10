@@ -45,6 +45,7 @@ def write_scripts():
     if os.path.isdir(SCRIPTS):
         shutil.rmtree(SCRIPTS)
     os.mkdir(SCRIPTS)
+    os.chmod(SCRIPTS, 0o777)
 
     files = os.listdir(PYTHON)
     pattern = re.compile("^[^_].*.py$")
