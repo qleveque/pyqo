@@ -1,6 +1,7 @@
 import sys
 import os
 import subprocess
+from urllib.parse import quote
 from _reader import *
 
 os.chdir(sys.path[0])
@@ -26,8 +27,8 @@ args = sys.argv[1:]
 for arg in args:
     if google:
         google = False
-        arg = arg.replace(' ','+')
-        cmd += 'https://www.google.com/search?q={} '.format(arg)
+        arg = quote(arg)
+        cmd += 'https://www.google.com/search?q={}'.format(arg)
     elif arg in data:
         cmd += data[arg]+' '
     elif arg in ['-n','--new-window']:
