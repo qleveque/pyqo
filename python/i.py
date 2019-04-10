@@ -29,6 +29,8 @@ for arg in args:
         new_window = True
     elif arg in ['-i','--incognito']:
         incognito = True
+    else:
+        exit()
 
 #add options
 if new_window:
