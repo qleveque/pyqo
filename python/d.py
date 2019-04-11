@@ -1,25 +1,34 @@
-import sys
-import os
-import subprocess
+#! /usr/bin/env python3
+"""
+    ``d`` command.
+"""
+
+import click
+import sys, os
 from _reader import *
+from _srl import *
+import subprocess
+from subprocess import DEVNULL
 
-filename = os.path.join(sys.path[0],'../data/c.json')
+@click.command()
+@click.argument('keys', required = False, nargs=-1)
+@decorate_srl
+def d(keys, remove, set, list):
+    """Open directories."""
+    filename = resolve_json_filename('c')
 
-if har(filename, sys.argv[1:], file=True):
-    exit()
+    if handle_srl(filename, keys, set, remove, list, type='file'):
+        return
 
-data = read_json(filename)
+    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'open "{}"'
 
-if len(sys.argv)>=2:
-    if sys.argv[1] in data:
-        dir_ = data[sys.argv[1]]
-else:
-    dir_ = os.getcwd()
+    if len(keys)<1:
+        dirs = [os.getcwd()]
+    else:
+        dirs = get_json(filename, keys)
 
-if sys.platform in ['linux', 'linux2']:
-    cmd = 'xdg-open ' + dir_
-else:
-    cmd = 'open "' + dir_+'"'
-    print(cmd)
+    for dir in dirs:
+        subprocess.call(cmd.format(dir), shell=True, stderr=DEVNULL, stdout=DEVNULL)
 
-subprocess.call(cmd, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+if __name__ == "__main__":
+    d()

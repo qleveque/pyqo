@@ -1,18 +1,25 @@
-import sys
-import os
-import subprocess
+#! /usr/bin/env python3
+"""
+    ``a`` command.
+"""
+
+import click
+import sys, os
 from _reader import *
+from _srl import *
+from _write_scripts import write_scripts
 
-filename = os.path.join(sys.path[0],'../data/a.json')
+@click.command()
+@click.argument('keys', required = False, nargs = -1)
+@decorate_srl
+def a(keys, remove, set, list):
+    """Aliases"""
 
-for i in range(len(sys.argv)):
-    if ' ' in sys.argv[i]:
-        sys.argv[i] = '"'+sys.argv[i]+'"'
-    elif sys.argv[i]=='':
-        sys.argv[i] = '""'
+    filename = resolve_json_filename('a')
 
-if har(filename, sys.argv[1:]):
-    exit()
+    if handle_srl(filename, keys, set, remove, list):
+        if remove or set:
+            write_scripts()
 
-from _write_scripts import *
-write_scripts()
+if __name__ == "__main__":
+    a()

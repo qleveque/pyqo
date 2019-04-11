@@ -1,60 +1,73 @@
+#! /usr/bin/env python3
+"""
+    The ``_reader`` module
+    ======================
+    Contains all the functions related to the reading and mofifications of the ``.json`` files
+"""
+
 import json
 import os
+import sys
 
-def read_json(path):
-    if os.path.isfile(path):
-        with open(path, encoding='utf-8') as f:
+QEY_PATH = os.path.join(sys.path[0],'..')
+SCRIPTS_PATH = os.path.join(QEY_PATH, 'scripts')
+DATA_PATH = os.path.join(QEY_PATH, 'data')
+PYTHON_PATH = os.path.join(QEY_PATH, 'python')
+
+def resolve_json_filename(command):
+    #init default filename
+    filename = os.path.join(DATA_PATH,'{}.json'.format(command))
+
+    #test if config
+    config = read_json(os.path.join(QEY_PATH,'config.json'))
+    key_name = '{}_json'.format(command)
+    if key_name in config:
+            filename = config[key_name]
+
+    return filename
+
+def read_json(filename):
+    if os.path.isfile(filename):
+        with open(filename, encoding='utf-8') as f:
             data = json.loads(f.read())
     else:
         data = {}
     return data
 
-def har(filename, args, **kwargs):
-    if len(args)<1:
-        return False
-    HELP = ['-h','--help']
-    ADD = ['-a','--add']
-    REMOVE = ['-r','--remove']
-    if args[0] not in HELP+ADD+REMOVE:
-        return False
+def list_json(filename, keys):
+    from _printer import print_map
+    if keys is None or len(keys)<1 or keys[0] is None:
+        data = read_json(filename)
+        print_map(data)
+    else:
+        values = get_json(filename, keys)
+        print(values)
+        dico = {keys[i] : values[i] for i in range(len(keys))}
+        print_map(dico)
 
+def get_json(filename, keys):
     data = read_json(filename)
-
-    if args[0] in HELP:
-        if len(args)>=2:
-            if args[1] in data:
-                print(data[args[1]])
+    l = []
+    for key in keys:
+        if key in data:
+            l.append(data[key])
         else:
-            from _printer import print_list
-            print_list(list(data))
-        return True
+            print('The key "{}" has no attributed value.'.format(key))
+            del key
+    return l
 
-    if args[0] in ADD:
-        if len(args)>=3:
-            to_add = ' '.join(args[2:])
-            if 'file' in kwargs and kwargs['file']:
-                if os.path.exists(to_add) and not os.path.isabs(to_add):
-                    to_add = os.path.join(os.getcwd(),to_add)
-                to_add = to_add.replace('\\','/')
-        elif len(args)>=2 and 'add_default' in kwargs:
-            to_add = kwargs['add_default']
-        else:
-            return True
-        data[args[1]] = to_add
-
-    elif args[0] in REMOVE and len(args)>=2:
-        if args[1] in data:
-            data.pop(args[1])
-
+def write_json(filename, data):
     with open(filename, 'w', encoding = 'utf-8') as f:
         json.dump(data, f)
 
-    return True
+def set_json(filename, map):
+    data = read_json(filename)
+    for key, value in map.items():
+        data[key] = value
+    write_json(filename, data)
 
-
-    if os.path.isfile(path):
-        with open(path, encoding='utf-8') as f:
-            data = json.loads(f.read())
-    else:
-        data = {}
-    return data
+def remove_json(filename, keys):
+    data = read_json(filename)
+    for key in keys:
+        data.pop(key)
+    write_json(filename, data)

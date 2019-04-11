@@ -1,18 +1,27 @@
-import sys
-import os
+#! /usr/bin/env python3
+"""
+    ``v`` command.
+"""
+
+import click
+import sys, os
 from _reader import *
+from _srl import *
 
-os.chdir(sys.path[0])
+@click.command()
+@click.argument('keys', required = False, nargs=-1)
+@decorate_srl
+def d(keys, remove, set, list):
+    """Contains variables."""
 
-filename = '../data/v.json'
-config = read_json('../config.json')
-if 'shared_dir' in config and config['shared_dir']!='':
-        filename = os.path.join(config['shared_dir'],'v.json')
+    filename = resolve_json_filename('v')
 
-if har(filename, sys.argv[1:]):
-    exit()
-        
-data = read_json(filename)
-    
-if len(sys.argv)>=2 and sys.argv[1] in data:
-    print(data[sys.argv[1]])
+    if handle_srl(filename, keys, set, remove, list):
+        return
+
+    values = get_json(filename, keys)
+    for value in values:
+        print(value)
+
+if __name__ == "__main__":
+    d()

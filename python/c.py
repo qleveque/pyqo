@@ -1,24 +1,41 @@
-import sys
-import os
+#! /usr/bin/env python3
+"""
+    ``c`` command.
+"""
+
+import click
+import sys, os
 from _reader import *
+from _srl import *
 
-filename = os.path.join(sys.path[0], '../data/c.json')
+@click.command()
+@click.argument('keys', required = False, nargs = -1)
+@decorate_srl
+def c(keys, remove, set, list):
+    """Navigate through directories."""
 
-if sys.platform in ['linux', 'linux2']:
-    end_file = os.path.join(sys.path[0],'../scripts/_c')
-else:
-    end_file = os.path.join(sys.path[0],'../scripts/_c.bat')
+    write_cd_file('')
 
-if har(filename, sys.argv[1:], file=True, add_default = os.getcwd()):
+    filename = resolve_json_filename('c')
+
+    if handle_srl(filename, keys, set, remove, list, type='file'):
+        return
+
+    if len(keys)!=1:
+        print("When changing directory, you should provide exactly one key.")
+    values = get_json(filename, keys)
+
+    if len(values)<1:
+        exit()
+
+    to_write = 'cd {}\n'.format(values[0])
+    write_cd_file(to_write)
+
+def write_cd_file(to_write):
+    ext = '' if sys.platform in ['linux', 'linux2'] else '.bat'
+    end_file = os.path.join(SCRIPTS_PATH,'_c'+ext)
     with open(end_file,'w', encoding = 'utf-8') as f:
-        f.write('')
-    exit()
+        f.write(to_write)
 
-data = read_json(filename)
-
-to_write = ''
-if len(sys.argv)>=2 and sys.argv[1] in data:
-    to_write = 'cd {}\n'.format(data[sys.argv[1]])
-
-with open(end_file,'w', encoding = 'utf-8') as f:
-    f.write(to_write)
+if __name__ == "__main__":
+    c()

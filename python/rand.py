@@ -1,9 +1,18 @@
+#! /usr/bin/env python3
+"""
+    ``rand`` command.
+"""
+
+import click
 import random
 import sys
 
-max = 100
-if len(sys.argv)>=2:
-    max = int(sys.argv[1])
+@click.command()
+@click.option('--min', '-m', help='minimum value', default=0,)
+@click.option('--max', '-M', help='maximum value', default=6,)
+def rand(min, max):
+    """Print a random number."""
+    print(random.randint(min,max))
 
-rand = random.randint(0,max)
-print(rand)
+if __name__ == "__main__":
+    rand()

@@ -1,55 +1,42 @@
-import sys
-import os
-import subprocess
-from urllib.parse import quote
+#! /usr/bin/env python3
+"""
+    ``i`` command.
+"""
+
+import click
+import sys, os
 from _reader import *
+from _srl import *
+import _webbrowser as web
+from urllib.parse import quote
 
-os.chdir(sys.path[0])
+@click.command()
+@click.argument('keys', required = False, nargs=-1)
+@click.option('--new_window', '-n', help='Open results in a new window.', is_flag=True,)
+@click.option('--google', '-g', help='Perform a google search.', multiple=True)
+@decorate_srl
+def i(keys, remove, set, list, new_window, google):
+    """Open websites."""
 
-filename = '../data/i.json'
-config = read_json('../config.json')
-if 'shared_dir' in config and config['shared_dir']!='':
-        filename = os.path.join(config['shared_dir'],'i.json')
+    filename = resolve_json_filename('i')
 
-if har(filename, sys.argv[1:]):
-    exit()
+    if handle_srl(filename, keys, set, remove, list):
+        return
 
-data = read_json(filename)
+    value_keys = get_json(filename, keys)
 
-cmd = ''
-new_window = False
-incognito = False
-google = False
+    google_url = 'https://www.google.com/search?q={}'
+    value_google = [google_url.format(quote(r)) for r in google]
 
-args = sys.argv[1:]
+    urls = value_keys + value_google
+    if len(urls)==0:
+        urls = ['']
 
-#parse args
-for arg in args:
-    if google:
-        google = False
-        arg = quote(arg)
-        cmd += 'https://www.google.com/search?q={}'.format(arg)
-    elif arg in data:
-        cmd += data[arg]+' '
-    elif arg in ['-n','--new-window']:
-        new_window = True
-    elif arg in ['-i','--incognito']:
-        incognito = True
-    elif arg in ['-g','--google']:
-        google = True
-    else:
-        exit()
+    for i in range(len(urls)):
+        if i == 0 and new_window:
+            web.open_new(urls[i])
+        else:
+            web.open_new_tab(urls[i])
 
-#add options
-if new_window:
-    cmd+='--new-window '
-if incognito:
-    cmd+=' --incognito '
-
-#make command
-if sys.platform in ['linux', 'linux2']:
-    cmd = 'chromium-browser '+cmd+' &'
-else:
-    cmd = 'chrome '+cmd
-
-subprocess.call(cmd, shell=True, stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
+if __name__ == "__main__":
+    i()

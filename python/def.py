@@ -1,12 +1,25 @@
+#! /usr/bin/env python3
+"""
+    ``def`` command.
+"""
+
+import click
 from bs4 import BeautifulSoup
 import requests
-import sys
+import re
+from urllib.parse import quote
 
-command = ' '.join(sys.argv[1:])
+@click.command()
+@click.argument('word')
+def definition(word):
+    """Retrieve french definition."""
+    url_larousse = 'http://www.larousse.fr/dictionnaires/rechercher?q={}&l=francais&culture='
+    url = url_larousse.format(quote(word))
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    defs = soup.find_all('li',attrs={"class":u"DivisionDefinition"})
+    for def_ in defs:
+        print('--'+def_.text)
 
-url = 'http://www.larousse.fr/dictionnaires/rechercher?q='+command+'&l=francais&culture='
-r = requests.get(url)
-soup = BeautifulSoup(r.content, 'html.parser')
-defs = soup.find_all('li',attrs={"class":u"DivisionDefinition"})
-for def_ in defs:
-    print('--'+def_.text)
+if __name__ == "__main__":
+    definition()
