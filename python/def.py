@@ -18,6 +18,9 @@ def definition(word):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html.parser')
     defs = soup.find_all('li',attrs={"class":u"DivisionDefinition"})
+    if len(defs)<1:
+        print("Nothing found...")
+        return
     for def_ in defs:
         print('--'+def_.text)
 
