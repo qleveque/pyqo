@@ -35,12 +35,10 @@ setup(
     long_description=readme,
     author=__author__,
     author_email=__email__,
-    url='https://github.com/bndr/pipreqs',
-    packages=[
-        'pyq'
-    ],
-    package_dir={'pyq':
-                 'pyq'},
+    url='https://github.com/Whenti/pyq',
+    packages = ['pyq'],
+    package_data={'pyq': ['data/*.json']},
+    package_dir={'pyq':'pyq'},
     include_package_data=True,
     install_requires=requirements,
     license='Apache License',
