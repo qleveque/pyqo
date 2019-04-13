@@ -1,3 +1,6 @@
 pyq/__pycache__/
 *.pyc
 pyq/data/*
+pyq.egg-info
+dist
+build
