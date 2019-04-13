@@ -1,0 +1,14 @@
+[console_scripts]
+a = pyq.a:main
+ant = pyq.ant:main
+c = pyq.c:main
+d = pyq.d:main
+def = pyq.def:main
+f = pyq.f:main
+i = pyq.i:main
+rand = pyq.rand:main
+say = pyq.say:main
+syn = pyq.syn:main
+v = pyq.v:main
+yget = pyq.yget:main
+
