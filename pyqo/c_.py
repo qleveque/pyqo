@@ -17,18 +17,17 @@ def main(keys, remove, set, list):
     filename = resolve_json_filename('c')
 
     if handle_srl(filename, keys, set, remove, list, type='file'):
-        return
+        exit('')
 
     if len(keys)!=1:
-        print("When changing directory, you should provide exactly one key.")
+        exit("When changing directory, you should provide exactly one key.")
 
     values = get_json(filename, keys)
 
     if len(values)<1:
-        exit()
+        exit("Key not known, aborting.")
 
-    os.chdir(values[0])
-    os.system("/bin/bash")
+    print(values[0])
 
 if __name__ == "__main__":
     main()

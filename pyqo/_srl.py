@@ -17,8 +17,7 @@ def decorate_srl(f):
 def handle_srl(filename, keys, set, remove, list, type = None):
     if set is not None:
         if len(keys)!=1:
-            print("When setting a new value, you should provide exactly one key.")
-            exit()
+            exit("When setting a new value, you should provide exactly one key.")
         if type in ['dir','file']:
             set = resolve_path(set)
         set_json(filename, {keys[0]: set})
@@ -39,6 +38,5 @@ def resolve_path(set):
         if not os.path.isabs(set):
             set = os.path.join(os.getcwd(),set)
     else:
-        print("Given file not found. Aborting.")
-        exit()
+        exit("Given file not found. Aborting.")
     return set.replace('\\','/')

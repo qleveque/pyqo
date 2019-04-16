@@ -1,6 +1,21 @@
 #! /usr/bin/env python3
 """
-    ``i`` command.
+##``i`` command
+
+Open your favourite websites with ease. See `i --help` for more details.
+
+###Example
+
+```
+$ # associate permanently the key 'github' to 'http://www.github.com'
+$ i github -a http://www.github.com
+$ # associate permanently the key 'so' to 'https://stackoverflow.com/'
+$ i so -a https://stackoverflow.com/
+$ # open the two websites on the existing webbrowser window
+$ i github so
+$ # open github and performs a google search for 'python' on a new webbrowser window
+$ i -n github -g python
+```
 """
 
 import click

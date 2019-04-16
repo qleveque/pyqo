@@ -1,5 +1,5 @@
-pyq/__pycache__/
+pyqo/__pycache__/
 *.pyc
-pyq.egg-info
+pyqo.egg-info
 dist
 build

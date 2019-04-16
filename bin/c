@@ -1,0 +1,11 @@
+#!/bin/bash
+#(c_ $@) &>&1
+#if [ ! -n "$1" ]; then
+#  cd $1
+#fi
+
+var=$(c_ $@ 1>&1)
+ret=$?
+if [ $ret -ne 1 ]; then
+  cd $var
+fi
