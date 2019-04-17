@@ -22,9 +22,9 @@ import os
 def main(url):
     """Download the youtube video in the current directory."""
 
-    print("Downloading {}".format(val))
+    print("Downloading {}".format(url))
     try:
-        yt = pytube.YouTube(val)
+        yt = pytube.YouTube(url)
         stream = yt.streams.first()
         stream.download(os.getcwd())
     except Exception as e:

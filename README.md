@@ -13,16 +13,16 @@ Requires `Python 3`. Tested on `Python 3.6`.
 ## Usage
 Install the [PyPI package](https://pypi.python.org/pypi/pyqo/):
 ```
-    pip install pyqo
+$ pip install pyqo
 ```
 and you're ready to go.
 You can also clone the repository:
 ```
-    git clone https://github.com/Whenti/pyqo
+$ git clone https://github.com/Whenti/pyqo
 ```
 or [download and extract the zip](https://github.com/Whenti/pyqo/archive/master.zip), and then run the setup:
 ```
-    python setup.py install
+$ python setup.py install
 ```
 
 Check the [commands documentation below](https://github.com/Whenti/pyqo#Commands) to see what is available.
@@ -160,17 +160,6 @@ Launches a synthesized voice that reads the given parameters. See `say --help` f
 $ say "Hi, how are you ?"
 ```
 
-## Command ``def``
-
-Searches for the definition of the word given in parameter (french). See `def --help` for more details.
-
-### Example
-
-```
-$ # searches for the definition of 'gentil'
-$ def gentil
-```
-
 ## Command ``rand``
 
 Display a random integer. See `rand --help` for more details.
@@ -191,4 +180,15 @@ Downloads in the current folder the youtube video whose url is passed as a param
 ```
 $ # downloads the youtube video '"Sweet Victory" Performance'
 $ yget https://www.youtube.com/watch?v=k9iYm9PEAHg
+```
+
+## Command ``define``
+
+Searches for the definition of the word given in parameter (french). See `def --help` for more details.
+
+### Example
+
+```
+$ # searches for the definition of 'gentil'
+$ define gentil
 ```

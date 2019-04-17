@@ -16,7 +16,7 @@ import click
 from bs4 import BeautifulSoup
 import requests
 import re
-from _printer import print_list
+from ._printer import print_list
 from urllib.parse import quote
 
 @click.command()

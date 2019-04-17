@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## Command ``def``
+## Command ``define``
 
 Searches for the definition of the word given in parameter (french). See `def --help` for more details.
 
@@ -8,7 +8,7 @@ Searches for the definition of the word given in parameter (french). See `def --
 
 ```
 $ # searches for the definition of 'gentil'
-$ def gentil
+$ define gentil
 ```
 """
 
