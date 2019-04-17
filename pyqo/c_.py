@@ -13,7 +13,7 @@ See `c --help` for more details.
 ```
 $ cd ~/Documents/games
 $ # associate permanently the key 'games' to '~/Documents/games'
-$ c games -a
+$ c games -a .
 $ # associate permanently the key 'films' to '~/Documents/films'
 $ c films -a /home/pyqo/Documents/films
 $ # equivalent to 'cd ~/Documents/films'
@@ -33,17 +33,17 @@ from ._srl import *
 @decorate_srl
 def main(keys, **kwargs):
     """Navigate through directories."""
-    
+
     command = 'd'
     filename = resolve_json_filename(command)
-    
+
     if handle_srl(command, filename, keys, type='file', **kwargs):
         exit()
 
     if len(keys)!=1:
         print("When changing directory, you should provide exactly one key.")
         exit()
-        
+
     values = get_json(filename, keys)
 
     if len(values)<1:

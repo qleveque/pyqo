@@ -60,7 +60,7 @@ $ v john_number -r
 
 Open your favourite files with ease. See `f --help` for more details.
 
-###Example
+### Example
 
 ```
 $ cd ~
@@ -119,7 +119,7 @@ See `c --help` for more details.
 ```
 $ cd ~/Documents/games
 $ # associate permanently the key 'games' to '~/Documents/games'
-$ c games -a
+$ c games -a .
 $ # associate permanently the key 'films' to '~/Documents/films'
 $ c films -a /home/pyqo/Documents/films
 $ # equivalent to 'cd ~/Documents/films'
