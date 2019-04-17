@@ -1,6 +1,8 @@
 #!/bin/bash
-var=$(c_ $@ 2>&1)
+c_ $@ 2>/tmp/pyqo
 ret=$?
 if [ $ret -ne 0 ]; then
+  var=$(cat /tmp/pyqo)
   cd $var
 fi
+rm /tmp/pyqo
