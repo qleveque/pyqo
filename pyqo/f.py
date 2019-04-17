@@ -4,7 +4,7 @@
 
 Open your favourite files with ease. See `f --help` for more details.
 
-###Example
+### Example
 
 ```
 $ cd ~
