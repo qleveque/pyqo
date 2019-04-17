@@ -29,6 +29,13 @@ def resolve_json_filename(command):
 
     return filename
 
+def set_config(command, datafile):
+    config_file = os.path.join(DATA_PATH,'config.json')
+    key_name = '{}_json'.format(command)
+    data = read_json(config_file)
+    data[key_name] = datafile
+    write_json(config_file, data)
+    
 def read_json(filename):
     if os.path.isfile(filename):
         with open(filename, encoding='utf-8') as f:

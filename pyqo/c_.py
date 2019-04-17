@@ -31,12 +31,13 @@ from ._srl import *
 @click.command()
 @click.argument('keys', required = False, nargs = -1)
 @decorate_srl
-def main(keys, remove, assign, list):
+def main(keys, **kwargs):
     """Navigate through directories."""
     
-    filename = resolve_json_filename('c')
+    command = 'd'
+    filename = resolve_json_filename(command)
     
-    if handle_srl(filename, keys, assign, remove, list, type='file'):
+    if handle_srl(command, filename, keys, type='file', **kwargs):
         exit()
 
     if len(keys)!=1:

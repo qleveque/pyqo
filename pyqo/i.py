@@ -30,12 +30,13 @@ from urllib.parse import quote
 @click.option('--new_window', '-n', help='Open results in a new window.', is_flag=True,)
 @click.option('--google', '-g', help='Perform a google search.', multiple=True)
 @decorate_srl
-def main(keys, remove, assign, list, new_window, google):
+def main(keys, new_window, google, **kwargs):
     """Open websites."""
 
-    filename = resolve_json_filename('i')
+    command = 'i'
+    filename = resolve_json_filename(command)
 
-    if handle_srl(filename, keys, assign, remove, list):
+    if handle_srl(command, filename, keys, **kwargs):
         return
 
     value_keys = get_json(filename, keys)
@@ -44,8 +45,8 @@ def main(keys, remove, assign, list, new_window, google):
     value_google = [google_url.format(quote(r)) for r in google]
 
     urls = value_keys + value_google
-    if len(urls)==0:
-        urls = ['']
+    if len(keys)==0:
+        urls = ['https://www.google.com']
 
     for i in range(len(urls)):
         if i == 0 and new_window:
