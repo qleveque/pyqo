@@ -10,9 +10,15 @@ import os
 import sys
 
 PYTHON_PATH = os.path.dirname(os.path.realpath(__file__))
-DATA_PATH = os.path.join(PYTHON_PATH, 'data')
+HOME_PATH = os.path.expanduser('~')
+CONFIG_PATH = os.path.join(HOME_PATH,'.config')
+DATA_PATH = os.path.join(CONFIG_PATH, 'pyqo')
 
 def resolve_json_filename(command):
+    if not os.path.isdir(CONFIG_PATH):
+        os.mkdir(CONFIG_PATH)
+    if not os.path.isdir(DATA_PATH):
+        os.mkdir(DATA_PATH)
     #init default filename
     filename = os.path.join(DATA_PATH,'{}.json'.format(command))
     #test if config

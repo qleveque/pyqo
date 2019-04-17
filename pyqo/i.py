@@ -30,12 +30,12 @@ from urllib.parse import quote
 @click.option('--new_window', '-n', help='Open results in a new window.', is_flag=True,)
 @click.option('--google', '-g', help='Perform a google search.', multiple=True)
 @decorate_srl
-def main(keys, remove, set, list, new_window, google):
+def main(keys, remove, assign, list, new_window, google):
     """Open websites."""
 
     filename = resolve_json_filename('i')
 
-    if handle_srl(filename, keys, set, remove, list):
+    if handle_srl(filename, keys, assign, remove, list):
         return
 
     value_keys = get_json(filename, keys)

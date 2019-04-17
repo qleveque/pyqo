@@ -24,12 +24,12 @@ from ._srl import *
 @click.command()
 @click.argument('keys', required = False, nargs=-1)
 @decorate_srl
-def main(keys, remove, set, list):
+def main(keys, remove, assign, list):
     """Contains variables."""
 
     filename = resolve_json_filename('v')
 
-    if handle_srl(filename, keys, set, remove, list):
+    if handle_srl(filename, keys, assign, remove, list):
         return
 
     values = get_json(filename, keys)

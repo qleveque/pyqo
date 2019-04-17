@@ -14,13 +14,13 @@ def decorate_srl(f):
     click.option('--list', '-l', help='List all the keys if no given key. Otherwise print the associated value.', is_flag=True,)(
     f)))
 
-def handle_srl(filename, keys, set, remove, list, type = None):
-    if set is not None:
+def handle_srl(filename, keys, assign, remove, list, type = None):
+    if assign is not None:
         if len(keys)!=1:
             exit("When setting a new value, you should provide exactly one key.")
         if type in ['dir','file']:
-            set = resolve_path(set)
-        set_json(filename, {keys[0]: set})
+            assign = resolve_path(assign)
+        set_json(filename, {keys[0]: assign})
         return True
 
     if remove:

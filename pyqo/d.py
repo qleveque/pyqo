@@ -29,11 +29,11 @@ from subprocess import DEVNULL
 @click.argument('keys', required = False, nargs=-1)
 @decorate_srl
 
-def main(keys, remove, set, list):
+def main(keys, remove, assign, list):
     """Open directories."""
     filename = resolve_json_filename('c')
 
-    if handle_srl(filename, keys, set, remove, list, type='file'):
+    if handle_srl(filename, keys, assign, remove, list, type='file'):
         return
 
     cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'open "{}"'

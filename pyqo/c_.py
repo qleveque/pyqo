@@ -31,23 +31,24 @@ from ._srl import *
 @click.command()
 @click.argument('keys', required = False, nargs = -1)
 @decorate_srl
-def main(keys, remove, set, list):
+def main(keys, remove, assign, list):
     """Navigate through directories."""
-
+    
     filename = resolve_json_filename('c')
-
-    if handle_srl(filename, keys, set, remove, list, type='file'):
-        exit('')
+    
+    if handle_srl(filename, keys, assign, remove, list, type='file'):
+        exit()
 
     if len(keys)!=1:
-        exit("When changing directory, you should provide exactly one key.")
-
+        print("When changing directory, you should provide exactly one key.")
+        exit()
+        
     values = get_json(filename, keys)
 
     if len(values)<1:
-        exit("Key not known, aborting.")
-
-    print(values[0])
+        print("Key not known, aborting.")
+        exit()
+    exit(values[0])
 
 if __name__ == "__main__":
     main()

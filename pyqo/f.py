@@ -27,12 +27,12 @@ from subprocess import DEVNULL
 @click.argument('keys', required = False, nargs=-1)
 @decorate_srl
 
-def main(keys, remove, set, list):
+def main(keys, remove, assign, list):
     """open directories"""
 
     filename = resolve_json_filename('f')
 
-    if handle_srl(filename, keys, set, remove, list, type='file'):
+    if handle_srl(filename, keys, assign, remove, list, type='file'):
         return
 
     files = get_json(filename, keys)
