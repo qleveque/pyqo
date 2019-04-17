@@ -40,6 +40,7 @@ setup(
     name='pyqo',
     version=__version__,
     description='Useful collection of command line scripts.',
+    long_description_content_type='text/markdown',
     long_description=README,
     author=__author__,
     author_email=__email__,
