@@ -45,7 +45,7 @@ def main(keys, new_window, google, **kwargs):
     value_google = [google_url.format(quote(r)) for r in google]
 
     urls = value_keys + value_google
-    if len(keys)==0:
+    if len(keys)==0 and len(google)==0:
         urls = ['https://www.google.com']
 
     for i in range(len(urls)):
