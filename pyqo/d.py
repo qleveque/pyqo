@@ -1,8 +1,23 @@
 #! /usr/bin/env python3
 """
-    ``d`` command.
-"""
+## ``d``
 
+Open the file manager to your favourite directories with ease.
+The command `d` shares its data with the command `c`.
+See `d --help` for more details.
+
+### Example
+
+```
+$ cd ~/Documents/games
+$ # open the current working directory, here '~/Documents/games'
+$ d
+$ # associate permanently the key 'films' to '~/Documents/films'
+$ d films -a /home/pyqo/Documents/films
+$ # open '~/Documents/films'
+$ d films
+```
+"""
 import click
 import sys, os
 from ._json import *

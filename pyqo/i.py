@@ -1,10 +1,10 @@
 #! /usr/bin/env python3
 """
-##``i`` command
+## ``i``
 
 Open your favourite websites with ease. See `i --help` for more details.
 
-###Example
+### Example
 
 ```
 $ # associate permanently the key 'github' to 'http://www.github.com'

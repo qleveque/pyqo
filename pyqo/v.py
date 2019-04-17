@@ -1,6 +1,19 @@
 #! /usr/bin/env python3
 """
-    ``v`` command.
+## ``v``
+
+Associative table to save small variables. See `v --help` for more details.
+
+### Example
+
+```
+$ # save the value '+44 1234 123456' under the key 'john_number'
+$ v john_number -a '+44 1234 123456'
+$ # print John's number
+$ v john_number
+$ # forget John's number
+$ v john_number -r
+```
 """
 
 import click

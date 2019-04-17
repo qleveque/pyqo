@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-##``f`` command
+##``f``
 
 Open your favourite files with ease. See `f --help` for more details.
 
@@ -10,10 +10,9 @@ Open your favourite files with ease. See `f --help` for more details.
 $ cd ~
 $ # associate permanently the key 'bashrc' to the file '~/.bashrc'
 $ f bashrc -a .bashrc
-$ # call 'f' with the associated key as parameter to open the affiliated file
+$ cd ~/Documents/games
+$ # open the '~/.bashrc' file
 $ f bashrc
-$ # if '~/.bashrc' is not one of your favourite files anymore
-$ f bashrc -r
 ```
 """
 

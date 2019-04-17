@@ -1,7 +1,16 @@
 #! /usr/bin/env python3
 """
-    ``say`` command.
+## ``say``
+
+Launches a synthesized voice that reads the given parameters. See `say --help` for more details.
+
+### Example
+
+```
+$ say "Hi, how are you ?"
+```
 """
+
 
 import click
 import sys, os

@@ -3,3 +3,4 @@ pyqo/__pycache__/
 pyqo.egg-info
 dist
 build
+.setup.py

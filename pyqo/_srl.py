@@ -9,7 +9,7 @@ import click
 from ._json import *
 
 def decorate_srl(f):
-    return click.option('--set', '-s', help='Assign a value to the given key.', default=None,)(
+    return click.option('--assign', '-a', help='Assign a value to the given key.', default=None,)(
     click.option('--remove', '-r', help='Remove a key.', is_flag=True,)(
     click.option('--list', '-l', help='List all the keys if no given key. Otherwise print the associated value.', is_flag=True,)(
     f)))

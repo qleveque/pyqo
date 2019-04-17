@@ -1,6 +1,15 @@
 #! /usr/bin/env python3
 """
-    ``rand`` command.
+## ``rand``
+
+Display a random integer. See `rand --help` for more details.
+
+### Example
+
+```
+$ # randomly draw an integer between 5 and 10
+$ rand -m 5 -M 10
+```
 """
 
 import click

@@ -1,6 +1,15 @@
 #! /usr/bin/env python3
 """
-    ``yget`` command.
+## ``yget``
+
+Downloads in the current folder the youtube video whose url is passed as a parameter. See `yget --help` for more details.
+
+### Example
+
+```
+$ # downloads the youtube video '"Sweet Victory" Performance'
+$ yget https://www.youtube.com/watch?v=k9iYm9PEAHg
+```
 """
 
 import click

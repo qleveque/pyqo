@@ -1,6 +1,15 @@
 #! /usr/bin/env python3
 """
-    ``def`` command.
+## ``def``
+
+Searches for the definition of the word given in parameter (french). See `def --help` for more details.
+
+### Example
+
+```
+$ # searches for the definition of 'gentil'
+$ def gentil
+```
 """
 
 import click

@@ -1,6 +1,26 @@
 #! /usr/bin/env python3
 """
-    ``c`` command.
+## ``c``
+
+Set the working directory of the command line to your favourite directories with ease.
+For a script to alter the current environment, it requires `source`'ing in linux.
+We suggest you to create an alias to avoid doing it manually : `alias c="source c"`.
+The command `c` shares its data with the command `d`.
+See `c --help` for more details.
+
+### Example
+
+```
+$ cd ~/Documents/games
+$ # associate permanently the key 'games' to '~/Documents/games'
+$ c games -a
+$ # associate permanently the key 'films' to '~/Documents/films'
+$ c films -a /home/pyqo/Documents/films
+$ # equivalent to 'cd ~/Documents/films'
+$ c films
+$ # equivalent to 'cd ~/Documents/games'
+$ c games
+```
 """
 
 import click
