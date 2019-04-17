@@ -2,7 +2,7 @@
 """
 ## Command ``define``
 
-Searches for the definition of the word given in parameter (french). See `def --help` for more details.
+Searches for the definition of the word given in parameter (french). See `define --help` for more details.
 
 ### Example
 

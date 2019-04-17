@@ -184,7 +184,7 @@ $ yget https://www.youtube.com/watch?v=k9iYm9PEAHg
 
 ## Command ``define``
 
-Searches for the definition of the word given in parameter (french). See `def --help` for more details.
+Searches for the definition of the word given in parameter (french). See `define --help` for more details.
 
 ### Example
 
