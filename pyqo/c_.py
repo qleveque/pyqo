@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``c``
+## Command ``c``
 
 Set the working directory of the command line to your favourite directories with ease.
 For a script to alter the current environment, it requires `source`'ing in linux.

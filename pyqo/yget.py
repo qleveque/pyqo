@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``yget``
+## Command ``yget``
 
 Downloads in the current folder the youtube video whose url is passed as a parameter. See `yget --help` for more details.
 

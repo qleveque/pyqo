@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``say``
+## Command ``say``
 
 Launches a synthesized voice that reads the given parameters. See `say --help` for more details.
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-##``f``
+## Command ``f``
 
 Open your favourite files with ease. See `f --help` for more details.
 

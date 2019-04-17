@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``rand``
+## Command ``rand``
 
 Display a random integer. See `rand --help` for more details.
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``ant``
+## Command ``ant``
 
 Searches for all antonyms of the word given in parameter (french). See `ant --help` for more details.
 

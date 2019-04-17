@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``d``
+## Command ``d``
 
 Open the file manager to your favourite directories with ease.
 The command `d` shares its data with the command `c`.

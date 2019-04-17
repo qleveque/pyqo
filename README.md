@@ -8,7 +8,7 @@ Fully compatible with :
 - **Windows** 7 and higher.
 - **Linux** distributions running under the X Window System.
 
-Requires Python 3. Tested on `Python 3.6`.
+Requires `Python 3`. Tested on `Python 3.6`.
 
 ## Usage
 Install the [PyPI package](https://pypi.python.org/pypi/pyqo/):
@@ -25,7 +25,7 @@ or [download and extract the zip](https://github.com/Whenti/pyqo/archive/master.
     python setup.py install
 ```
 
-Check the [commands doc below](https://github.com/Whenti/pyqo#Commands) to see what is available.
+Check the [commands documentation below](https://github.com/Whenti/pyqo#Commands) to see what is available.
 
 ## Dependencies
 See the [requirements.txt](requirements.txt) file for details.
@@ -37,11 +37,11 @@ See the [requirements.txt](requirements.txt) file for details.
 ## License
 This project is proudly licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
-#Commands
+# Commands
 Below we briefly describe the different commands of `pyqo`. Make sure to use the `--help` option for more details.
 
 
-## ``v``
+## Command ``v``
 
 Associative table to save small variables. See `v --help` for more details.
 
@@ -56,7 +56,7 @@ $ # forget John's number
 $ v john_number -r
 ```
 
-##``f``
+## Command ``f``
 
 Open your favourite files with ease. See `f --help` for more details.
 
@@ -71,7 +71,7 @@ $ # open the '~/.bashrc' file
 $ f bashrc
 ```
 
-## ``d``
+## Command ``d``
 
 Open the file manager to your favourite directories with ease.
 The command `d` shares its data with the command `c`.
@@ -89,7 +89,7 @@ $ # open '~/Documents/films'
 $ d films
 ```
 
-## ``i``
+## Command ``i``
 
 Open your favourite websites with ease. See `i --help` for more details.
 
@@ -106,7 +106,7 @@ $ # open github and performs a google search for 'python' on a new webbrowser wi
 $ i -n github -g python
 ```
 
-## ``c``
+## Command ``c``
 
 Set the working directory of the command line to your favourite directories with ease.
 For a script to alter the current environment, it requires `source`'ing in linux.
@@ -128,7 +128,7 @@ $ # equivalent to 'cd ~/Documents/games'
 $ c games
 ```
 
-## ``ant``
+## Command ``ant``
 
 Searches for all antonyms of the word given in parameter (french). See `ant --help` for more details.
 
@@ -139,7 +139,7 @@ $ # searches for all antonyms of 'gentil'
 $ ant gentil
 ```
 
-## ``syn``
+## Command ``syn``
 
 Searches for all synonyms of the word given in parameter (french). See `syn --help` for more details.
 
@@ -150,7 +150,7 @@ $ # searches for all synonyms of 'gentil'
 $ syn gentil
 ```
 
-## ``say``
+## Command ``say``
 
 Launches a synthesized voice that reads the given parameters. See `say --help` for more details.
 
@@ -160,7 +160,7 @@ Launches a synthesized voice that reads the given parameters. See `say --help` f
 $ say "Hi, how are you ?"
 ```
 
-## ``def``
+## Command ``def``
 
 Searches for the definition of the word given in parameter (french). See `def --help` for more details.
 
@@ -171,7 +171,7 @@ $ # searches for the definition of 'gentil'
 $ def gentil
 ```
 
-## ``rand``
+## Command ``rand``
 
 Display a random integer. See `rand --help` for more details.
 
@@ -182,7 +182,7 @@ $ # randomly draw an integer between 5 and 10
 $ rand -m 5 -M 10
 ```
 
-## ``yget``
+## Command ``yget``
 
 Downloads in the current folder the youtube video whose url is passed as a parameter. See `yget --help` for more details.
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``i``
+## Command ``i``
 
 Open your favourite websites with ease. See `i --help` for more details.
 

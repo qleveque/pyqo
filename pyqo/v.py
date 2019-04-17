@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``v``
+## Command ``v``
 
 Associative table to save small variables. See `v --help` for more details.
 

@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 """
-## ``syn``
+## Command ``syn``
 
 Searches for all synonyms of the word given in parameter (french). See `syn --help` for more details.
 
