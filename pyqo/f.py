@@ -38,7 +38,7 @@ def main(keys, **kwargs):
 
     files = get_json(filename, keys)
 
-    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'open "{}"'
+    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'
     for file in files:
         subprocess.call(cmd.format(file), shell=True, stderr=DEVNULL, stdout=DEVNULL)
 

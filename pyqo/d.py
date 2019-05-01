@@ -37,7 +37,7 @@ def main(keys, **kwargs):
     if handle_srl(command, filename, keys, type='file', **kwargs):
         return
 
-    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'open "{}"'
+    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'
 
     if len(keys)<1:
         dirs = [os.getcwd()]
