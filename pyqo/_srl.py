@@ -48,4 +48,4 @@ def resolve_path(set):
             set = os.path.join(os.getcwd(),set)
     else:
         exit("Given file not found. Aborting.")
-    return set.replace('\\','/')
+    return set
