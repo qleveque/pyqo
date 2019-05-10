@@ -49,7 +49,7 @@ def main(keys, **kwargs):
     if len(values)<1:
         print("Key not known, aborting.")
         exit()
-    exit(values[0])
+    exit('"'+values[0]+'"')
 
 if __name__ == "__main__":
     main()

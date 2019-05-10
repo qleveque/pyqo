@@ -5,5 +5,5 @@ SET /p VAR=<%userprofile%\temp
 DEL %userprofile%\temp
 
 IF %ret% == 1 (
-    cd %VAR%
+    cd /d %VAR%
 )
