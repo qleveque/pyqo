@@ -37,7 +37,7 @@ def main(keys, **kwargs):
     command = 'd'
     filename = resolve_json_filename(command)
 
-    if handle_srl(command, filename, keys, type='file', **kwargs):
+    if handle_srl(command, filename, keys, type='dir', **kwargs):
         exit()
 
     if len(keys)!=1:

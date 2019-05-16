@@ -34,7 +34,7 @@ def main(keys, **kwargs):
     command = 'd'
     filename = resolve_json_filename(command)
 
-    if handle_srl(command, filename, keys, type='file', **kwargs):
+    if handle_srl(command, filename, keys, type='dir', **kwargs):
         return
 
     cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'

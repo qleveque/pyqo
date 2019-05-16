@@ -1,9 +1,10 @@
 @ECHO OFF
 c_ %* 2> %userprofile%\temp
-SET ret=%ERRORLEVEL%
+SET r=%ERRORLEVEL%
 SET /p VAR=<%userprofile%\temp
 DEL %userprofile%\temp
-
-IF %ret% == 1 (
-    cd /d %VAR%
+echo non
+IF "%r%"=="1" (
+	echo oui
+	cd /d %VAR%
 )
