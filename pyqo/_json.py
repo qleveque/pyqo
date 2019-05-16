@@ -51,7 +51,6 @@ def list_json(filename, keys):
         print_map(data)
     else:
         values = get_json(filename, keys)
-        print(values)
         dico = {keys[i] : values[i] for i in range(len(keys))}
         print_map(dico)
 
