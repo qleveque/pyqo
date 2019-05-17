@@ -29,8 +29,9 @@ from urllib.parse import quote
 @click.argument('keys', required = False, nargs=-1)
 @click.option('--new_window', '-n', help='Open results in a new window.', is_flag=True,)
 @click.option('--google', '-g', help='Perform a google search.', multiple=True)
+@click.option('--youtube', '-y', help='Perform a youtube search.', multiple=True)
 @decorate_srl
-def main(keys, new_window, google, **kwargs):
+def main(keys, new_window, google, youtube, **kwargs):
     """Open websites."""
 
     command = 'i'
@@ -44,8 +45,11 @@ def main(keys, new_window, google, **kwargs):
     google_url = 'https://www.google.com/search?q={}'
     value_google = [google_url.format(quote(r)) for r in google]
 
-    urls = value_keys + value_google
-    if len(keys)==0 and len(google)==0:
+    youtube_url = 'https://www.youtube.com/results?search_query={}'
+    value_youtube = [youtube_url.format(quote(r)) for r in youtube]
+
+    urls = value_keys + value_google + value_youtube
+    if len(keys)==0 and len(google)==0 and len(youtube)==0:
         urls = ['https://www.google.com']
 
     for i in range(len(urls)):
