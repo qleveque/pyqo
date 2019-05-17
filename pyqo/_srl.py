@@ -22,6 +22,8 @@ def handle_srl(command, filename, keys, assign = None, delete = None, list = Non
             exit()
         if type in ['dir','file']:
             assign = resolve_path(assign)
+            if type=='dir' and len(assign)>=2 and assign[-2:] in ["\\.","/."]:
+                assign = assign[:-2]
         set_json(filename, {keys[0]: assign})
         return True
 
