@@ -128,17 +128,6 @@ $ # equivalent to 'cd ~/Documents/games'
 $ c games
 ```
 
-## Command ``ant``
-
-Searches for all antonyms of the word given in parameter (french). See `ant --help` for more details.
-
-### Example
-
-```
-$ # searches for all antonyms of 'gentil'
-$ ant gentil
-```
-
 ## Command ``syn``
 
 Searches for all synonyms of the word given in parameter (french). See `syn --help` for more details.
@@ -158,6 +147,17 @@ Launches a synthesized voice that reads the given parameters. See `say --help` f
 
 ```
 $ say "Hi, how are you ?"
+```
+
+## Command ``anto``
+
+Searches for all antonyms of the word given in parameter (french). See `anto --help` for more details.
+
+### Example
+
+```
+$ # searches for all antonyms of 'gentil'
+$ anto gentil
 ```
 
 ## Command ``rand``

@@ -1,14 +1,14 @@
 #! /usr/bin/env python3
 """
-## Command ``ant``
+## Command ``anto``
 
-Searches for all antonyms of the word given in parameter (french). See `ant --help` for more details.
+Searches for all antonyms of the word given in parameter (french). See `anto --help` for more details.
 
 ### Example
 
 ```
 $ # searches for all antonyms of 'gentil'
-$ ant gentil
+$ anto gentil
 ```
 """
 

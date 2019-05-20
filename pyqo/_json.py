@@ -35,7 +35,7 @@ def set_config(command, datafile):
     data = read_json(config_file)
     data[key_name] = datafile
     write_json(config_file, data)
-    
+
 def read_json(filename):
     if os.path.isfile(filename):
         with open(filename, encoding='utf-8') as f:
