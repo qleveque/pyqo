@@ -12,7 +12,7 @@ $ v john_number -a '+44 1234 123456'
 $ # print John's number
 $ v john_number
 $ # forget John's number
-$ v john_number -r
+$ v john_number -d
 ```
 """
 
@@ -26,7 +26,7 @@ from ._srl import *
 @decorate_srl
 def main(keys, **kwargs):
     """Contains variables."""
-    
+
     command = 'v'
     filename = resolve_json_filename(command)
 
