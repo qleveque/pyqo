@@ -39,7 +39,7 @@ def handle_srl(command, filename, keys, assign = None, delete = None, list = Non
         if len(keys)>0:
             print('Should not provide any key when setting a new datafile')
             exit()
-        set_config(command, set_datafile)
+        set_config(command, resolve_path(set_datafile))
         return True
 
     return False
