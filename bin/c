@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 tmp_file="/tmp/pyqo"
 c_ $@ 2>$tmp_file
 ret=$?
