@@ -13,8 +13,8 @@ $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
 $ i so -a https://stackoverflow.com/
 $ # open the two websites on the existing webbrowser window
 $ i github so
-$ # open github and performs a google search for 'python' on a new webbrowser window
-$ i -n github -g python
+$ # open github and performs a google search for 'python'
+$ i github -g python
 ```
 """
 
@@ -22,16 +22,16 @@ import click
 import sys, os
 from ._json import *
 from ._srl import *
-from ._webbrowser import open_new, open_new_tab
 from urllib.parse import quote
+import subprocess
+from subprocess import DEVNULL
 
 @click.command()
 @click.argument('keys', required = False, nargs=-1)
-@click.option('--new_window', '-n', help='Open results in a new window.', is_flag=True,)
 @click.option('--google', '-g', help='Perform a google search.', multiple=True)
 @click.option('--youtube', '-y', help='Perform a youtube search.', multiple=True)
 @decorate_srl
-def main(keys, new_window, google, youtube, **kwargs):
+def main(keys, google, youtube, **kwargs):
     """Open websites."""
 
     command = 'i'
@@ -52,11 +52,10 @@ def main(keys, new_window, google, youtube, **kwargs):
     if len(keys)==0 and len(google)==0 and len(youtube)==0:
         urls = ['https://www.google.com']
 
-    for i in range(len(urls)):
-        if i == 0 and new_window:
-            open_new(urls[i])
-        else:
-            open_new_tab(urls[i])
+    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'
+
+    for url in urls:
+        subprocess.call(cmd.format(url), shell=True, stderr=DEVNULL, stdout=DEVNULL)
 
 if __name__ == "__main__":
     main()
