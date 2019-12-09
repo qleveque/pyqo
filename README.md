@@ -102,8 +102,8 @@ $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
 $ i so -a https://stackoverflow.com/
 $ # open the two websites on the existing webbrowser window
 $ i github so
-$ # open github and performs a google search for 'python' on a new webbrowser window
-$ i -n github -g python
+$ # open github and performs a google search for 'python'
+$ i github -g python
 ```
 
 ## Command ``c``
