@@ -7,8 +7,8 @@ Searches for the definition of the word given in parameter (french). See `define
 ### Example
 
 ```
-$ # searches for the definition of 'gentil'
-$ define gentil
+$ # searches for the definition of 'efficace'
+$ define efficace
 ```
 """
 

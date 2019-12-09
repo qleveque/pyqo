@@ -7,8 +7,8 @@ Searches for all antonyms of the word given in parameter (french). See `anto --h
 ### Example
 
 ```
-$ # searches for all antonyms of 'gentil'
-$ anto gentil
+$ # searches for all antonyms of 'efficace'
+$ anto efficace
 ```
 """
 

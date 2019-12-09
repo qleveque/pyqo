@@ -7,8 +7,8 @@ Searches for all synonyms of the word given in parameter (french). See `syn --he
 ### Example
 
 ```
-$ # searches for all synonyms of 'gentil'
-$ syn gentil
+$ # searches for all synonyms of 'efficace'
+$ syn efficace
 ```
 """
 

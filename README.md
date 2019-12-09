@@ -135,8 +135,8 @@ Searches for all synonyms of the word given in parameter (french). See `syn --he
 ### Example
 
 ```
-$ # searches for all synonyms of 'gentil'
-$ syn gentil
+$ # searches for all synonyms of 'efficace'
+$ syn efficace
 ```
 
 ## Command ``say``
@@ -156,8 +156,8 @@ Searches for all antonyms of the word given in parameter (french). See `anto --h
 ### Example
 
 ```
-$ # searches for all antonyms of 'gentil'
-$ anto gentil
+$ # searches for all antonyms of 'efficace'
+$ anto efficace
 ```
 
 ## Command ``rand``
@@ -189,6 +189,6 @@ Searches for the definition of the word given in parameter (french). See `define
 ### Example
 
 ```
-$ # searches for the definition of 'gentil'
-$ define gentil
+$ # searches for the definition of 'efficace'
+$ define efficace
 ```
