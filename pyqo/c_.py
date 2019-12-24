@@ -49,7 +49,7 @@ def main(keys, **kwargs):
     if len(values)<1:
         print("Key not known, aborting.")
         exit()
-    ret = values[0] if sys.platform in ['linux','linux2'] else '"'+values[0]+'"'
+    ret = values[0]
     exit(ret)
 
 if __name__ == "__main__":
