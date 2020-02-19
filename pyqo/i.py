@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ## Command ``i``
 
@@ -13,49 +14,42 @@ $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
 $ i so -a https://stackoverflow.com/
 $ # open the two websites on the existing webbrowser window
 $ i github so
-$ # open github and performs a google search for 'python'
-$ i github -g python
 ```
 """
 
-import click
-import sys, os
-from ._json import *
-from ._srl import *
-from urllib.parse import quote
 import subprocess
+import sys
+import argparse
 from subprocess import DEVNULL
 
-@click.command()
-@click.argument('keys', required = False, nargs=-1)
-@click.option('--google', '-g', help='Perform a google search.', multiple=True)
-@click.option('--youtube', '-y', help='Perform a youtube search.', multiple=True)
-@decorate_srl
-def main(keys, google, youtube, **kwargs):
+from pyqo.utils.json import get_json, resolve_json_filename
+from pyqo.utils.srl import handle_srl, complete_srl_parser
+
+
+def main():
     """Open websites."""
 
-    command = 'i'
-    filename = resolve_json_filename(command)
+    parser = argparse.ArgumentParser(description=main.__doc__)
+    complete_srl_parser(parser)
+    parser.add_argument('keys', type=str, nargs='*')
+    args = parser.parse_args()
 
-    if handle_srl(command, filename, keys, **kwargs):
+    command = 'i'
+    if handle_srl(command, args):
         return
 
-    value_keys = get_json(filename, keys)
+    filename = resolve_json_filename(command)
 
-    google_url = 'https://www.google.com/search?q={}'
-    value_google = [google_url.format(quote(r)) for r in google]
+    if not args.keys:
+        urls = ['https://']
+    else:
+        urls = get_json(filename, args.keys)
 
-    youtube_url = 'https://www.youtube.com/results?search_query={}'
-    value_youtube = [youtube_url.format(quote(r)) for r in youtube]
-
-    urls = value_keys + value_google + value_youtube
-    if len(keys)==0 and len(google)==0 and len(youtube)==0:
-        urls = ['https://www.google.com']
-
-    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'
+    cmd = 'xdg-open {}' if sys.platform in ['linux', 'linux2'] else 'start "" "{}"'
 
     for url in urls:
         subprocess.call(cmd.format(url), shell=True, stderr=DEVNULL, stdout=DEVNULL)
+
 
 if __name__ == "__main__":
     main()

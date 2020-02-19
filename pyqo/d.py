@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ## Command ``d``
 
@@ -18,34 +19,42 @@ $ # open '~/Documents/films'
 $ d films
 ```
 """
-import click
-import sys, os
-from ._json import *
-from ._srl import *
+
+import os
 import subprocess
+import sys
+import argparse
 from subprocess import DEVNULL
 
-@click.command()
-@click.argument('keys', required = False, nargs=-1)
-@decorate_srl
+from pyqo.utils.json import get_json, resolve_json_filename
+from pyqo.utils.srl import handle_srl, complete_srl_parser
 
-def main(keys, **kwargs):
+
+def main():
     """Open directories."""
-    command = 'd'
-    filename = resolve_json_filename(command)
 
-    if handle_srl(command, filename, keys, type='dir', **kwargs):
+    parser = argparse.ArgumentParser(description=main.__doc__)
+    complete_srl_parser(parser)
+    parser.add_argument('keys', type=str, nargs='*')
+    args = parser.parse_args()
+
+    command = 'd'
+    if handle_srl(command, args, file_type=True):
         return
 
-    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'
-
-    if len(keys)<1:
+    if not args.keys:
         dirs = [os.getcwd()]
     else:
-        dirs = get_json(filename, keys)
+        filename = resolve_json_filename(command)
+        dirs = get_json(filename, args.keys)
+        if not dirs:
+            return
 
-    for dir in dirs:
-        subprocess.call(cmd.format(dir), shell=True, stderr=DEVNULL, stdout=DEVNULL)
+    cmd = 'xdg-open "{}"' if sys.platform in ['linux', 'linux2'] else 'start "" "{}"'
+    for dir_ in dirs:
+        subprocess.call(cmd.format(dir_), shell=True, stderr=DEVNULL, stdout=DEVNULL)
+
 
 if __name__ == "__main__":
     main()
+

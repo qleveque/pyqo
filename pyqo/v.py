@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ## Command ``v``
 
@@ -16,26 +17,29 @@ $ v john_number -d
 ```
 """
 
-import click
-import sys, os
-from ._json import *
-from ._srl import *
+import argparse
 
-@click.command()
-@click.argument('keys', required = False, nargs=-1)
-@decorate_srl
-def main(keys, **kwargs):
+from pyqo.utils.json import get_json, resolve_json_filename
+from pyqo.utils.srl import handle_srl, complete_srl_parser
+
+
+def main():
     """Contains variables."""
 
+    parser = argparse.ArgumentParser(description=main.__doc__)
+    complete_srl_parser(parser)
+    parser.add_argument('keys', type=str, nargs='*')
+    args = parser.parse_args()
+
     command = 'v'
-    filename = resolve_json_filename(command)
-
-    if handle_srl(command, filename, keys, **kwargs):
+    if handle_srl(command, args):
         return
-
-    values = get_json(filename, keys)
+    
+    filename = resolve_json_filename(command)
+    values = get_json(filename, args.keys)
     for value in values:
         print(value)
+
 
 if __name__ == "__main__":
     main()

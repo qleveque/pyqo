@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ## Command ``f``
 
@@ -16,29 +17,30 @@ $ f bashrc
 ```
 """
 
-import click
-import sys, os
-from ._json import *
-from ._srl import *
 import subprocess
+import sys
+import argparse
 from subprocess import DEVNULL
 
+from pyqo.utils.json import get_json, resolve_json_filename
+from pyqo.utils.srl import handle_srl, complete_srl_parser
 
-@click.command()
-@click.argument('keys', required = False, nargs=-1)
-@decorate_srl
-def main(keys, **kwargs):
-    """open directories"""
+
+def main():
+    """Open files."""
+
+    parser = argparse.ArgumentParser(description=main.__doc__)
+    complete_srl_parser(parser)
+    parser.add_argument('keys', type=str, nargs='*')
+    args = parser.parse_args()
 
     command = 'f'
-    filename = resolve_json_filename(command)
-
-    if handle_srl(command, filename, keys, type='file', **kwargs):
+    if handle_srl(command, args, file_type=True):
         return
 
-    files = get_json(filename, keys)
-
-    cmd = 'xdg-open {}' if sys.platform in ['linux','linux2'] else 'start "" "{}"'
+    filename = resolve_json_filename(command)
+    files = get_json(filename, args.keys)
+    cmd = 'xdg-open {}' if sys.platform in ['linux', 'linux2'] else 'start "" "{}"'
     for file in files:
         subprocess.call(cmd.format(file), shell=True, stderr=DEVNULL, stdout=DEVNULL)
 

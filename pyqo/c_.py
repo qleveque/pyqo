@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 ## Command ``c``
 
@@ -13,9 +14,9 @@ See `c --help` for more details.
 ```
 $ cd ~/Documents/games
 $ # associate permanently the key 'games' to '~/Documents/games'
-$ c games -a .
+$ d games -a .
 $ # associate permanently the key 'films' to '~/Documents/films'
-$ c films -a /home/pyqo/Documents/films
+$ d films -a /home/pyqo/Documents/films
 $ # equivalent to 'cd ~/Documents/films'
 $ c films
 $ # equivalent to 'cd ~/Documents/games'
@@ -23,34 +24,28 @@ $ c games
 ```
 """
 
-import click
-import sys, os
-from ._json import *
-from ._srl import *
+import argparse
+import sys
 
-@click.command()
-@click.argument('keys', required = False, nargs = -1)
-@decorate_srl
-def main(keys, **kwargs):
+from pyqo.utils.json import get_json, resolve_json_filename
+
+
+def main():
     """Navigate through directories."""
 
-    command = 'd'
-    filename = resolve_json_filename(command)
+    parser = argparse.ArgumentParser(description=main.__doc__)
+    parser.add_argument('key', type=str)
+    args = parser.parse_args()
 
-    if handle_srl(command, filename, keys, type='dir', **kwargs):
-        exit()
+    filename = resolve_json_filename('d')
+    values = get_json(filename, [args.key])
 
-    if len(keys)!=1:
-        print("When changing directory, you should provide exactly one key.")
-        exit()
+    if not values:
+        return
 
-    values = get_json(filename, keys)
-
-    if len(values)<1:
-        print("Key not known, aborting.")
-        exit()
     ret = values[0] if sys.platform in ['linux','linux2'] else '"'+values[0]+'"'
     exit(ret)
+
 
 if __name__ == "__main__":
     main()

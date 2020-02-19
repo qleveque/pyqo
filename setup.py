@@ -24,13 +24,6 @@ COMMANDS = commands()
 CONSOLE_SCRIPTS = ['{c}=pyqo.{c}:main'.format(c=command) for command in COMMANDS]
 SCRIPTS = ['bin/c','bin/c.bat']
 
-#requirements
-def requirements():
-    with open('requirements.txt','r',encoding = 'utf-8') as f:
-        lines = f.readlines()
-        return [line.replace('==','>=').strip() for line in lines]
-REQUIREMENTS = requirements()
-
 #readme
 with open('README.md', 'r', encoding = 'utf-8') as f:
     README = '\n'.join(f.readlines())
@@ -45,10 +38,9 @@ setup(
     author=__author__,
     author_email=__email__,
     url='https://github.com/Whenti/pyqo',
-    packages = ['pyqo'],
-    package_dir={'pyqo':'pyqo'},
+    packages = ['pyqo', 'pyqo.utils'],
+    package_dir={'pyqo':'pyqo', 'pyqo.utils':'pyqo/utils'},
     include_package_data=True,
-    install_requires=REQUIREMENTS,
     license='Apache License',
     zip_safe=False,
     keywords='command line scripts',
