@@ -39,7 +39,7 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
             keys = [args.key]
         else:
             keys = []
-    elif hasattr(args, "key"):
+    elif hasattr(args, "keys"):
         if args.keys is not None:
             keys = args.keys
         else:
@@ -52,7 +52,7 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
         if len(keys) != 1:
             print("When setting a new value, you should provide exactly one key.")
             exit()
-        if file_type in ['dir', 'file']:
+        if file_type:
             assign = resolve_path(assign)
             if len(assign) >= 2 and assign[-2:] in ["\\.", "/."]:
                 assign = assign[:-2]
