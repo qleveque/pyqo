@@ -81,5 +81,6 @@ def resolve_path(path: str) -> str:
     if not os.path.isabs(path):
         path = os.path.join(os.getcwd(), path)
     if not os.path.exists(path):
-        open(path, 'a').close()
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write('{}')
     return path
