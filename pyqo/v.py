@@ -3,7 +3,7 @@
 """
 ## Command ``v``
 
-Associative table to save small variables. See `v --help` for more details.
+Associative table to save small variables.
 
 ### Example
 

@@ -11,13 +11,15 @@ import os
 import subprocess
 import distutils.spawn
 
+from typing import List, Dict
+
 from pyqo.utils.printer import print_map
 
 HOME_PATH = os.path.expanduser('~')
 DATA_PATH = os.path.join(HOME_PATH, '.config', 'pyqo')
 
 
-def resolve_json_filename(command):
+def resolve_json_filename(command: str):
     if not os.path.isdir(DATA_PATH):
         os.makedirs(DATA_PATH)
     # init default filename
@@ -31,7 +33,7 @@ def resolve_json_filename(command):
     return filename
 
 
-def set_config(command, datafile):
+def set_config(command: str, datafile: str):
     config_file = os.path.join(DATA_PATH, 'config.json')
     key_name = '{}_json'.format(command)
     data = read_json(config_file)
@@ -40,7 +42,7 @@ def set_config(command, datafile):
     call_qey()
 
 
-def read_json(filename):
+def read_json(filename: str):
     if os.path.isfile(filename):
         with open(filename, encoding='utf-8') as f:
             data = json.loads(f.read())
@@ -49,37 +51,38 @@ def read_json(filename):
     return data
 
 
-def list_json(filename):
+def list_json(filename: str):
     data = read_json(filename)
     print_map(data)
 
 
-def get_json(filename, keys):
+def get_json(filename: str, keys: List[str], verbose: bool = True):
     data = read_json(filename)
-    l = []
+    lst = []
     for key in keys:
         if key in data:
-            l.append(data[key])
+            lst.append(data[key])
         else:
-            print('The key "{}" has no attributed value.'.format(key))
+            if verbose:
+                print('The key "{}" has no attributed value.'.format(key))
             del key
-    return l
+    return lst
 
 
-def write_json(filename, data):
+def write_json(filename: str, data: Dict[str, str]):
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f)
 
 
-def set_json(filename, map):
+def set_json(filename: str, map_: Dict[str, str]):
     data = read_json(filename)
-    for key, value in map.items():
+    for key, value in map_.items():
         data[key] = value
     write_json(filename, data)
     call_qey()
 
 
-def remove_json(filename, keys):
+def remove_json(filename: str, keys: List[str]):
     data = read_json(filename)
     for key in keys:
         data.pop(key)

@@ -3,7 +3,7 @@
 """
 ## Command ``i``
 
-Open your favourite websites with ease. See `i --help` for more details.
+Open your favourite websites with ease.
 
 ### Example
 

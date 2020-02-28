@@ -3,7 +3,7 @@
 """
 ## Command ``f``
 
-Open your favourite files with ease. See `f --help` for more details.
+Open your favourite files with ease.
 
 ### Example
 

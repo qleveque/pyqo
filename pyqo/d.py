@@ -5,7 +5,6 @@
 
 Open the file manager to your favourite directories with ease.
 The command `d` shares its data with the command `c`.
-See `d --help` for more details.
 
 ### Example
 

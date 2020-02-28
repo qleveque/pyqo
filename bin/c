@@ -1,5 +1,5 @@
 #!/bin/bash
-tmp_file="/tmp/pyqo"
+tmp_file="$HOME/.pyqo"
 c_ $@ 2>$tmp_file
 ret=$?
 if [ $ret -ne 0 ]; then

@@ -10,15 +10,15 @@ WIDTH = 19
 PER_LINE = 4
 
 
-def print_list(datas: List[str]):
+def print_list(lst: List[str]):
     r = ""
-    for idx, data in enumerate(sorted(datas)):
-        r += "{d:<{width}}".format(d=data, width=WIDTH)
-        if (idx+1)%PER_LINE == 0:
+    for idx, elem in enumerate(sorted(lst)):
+        r += "{d:<{width}}".format(d=elem, width=WIDTH)
+        if (idx+1) % PER_LINE == 0:
             r += "\n"
     print(r)
 
 
-def print_map(datas: Dict[str, str]):
-    for key, value in datas.items():
+def print_map(map_: Dict[str, str]):
+    for key, value in map_.items():
         print('{key:<{width}}: {value}'.format(key=key, width=WIDTH, value=value))

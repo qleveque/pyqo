@@ -3,7 +3,7 @@
 """
 
 # pyqo
-A set of useful command line scripts to navigate through your files and directories, and to get informed quickly.
+A set of useful command line scripts to navigate through your files, directories and favourite websites with ease.
 
 ## Compatibility
 Fully compatible with :
@@ -11,7 +11,7 @@ Fully compatible with :
 - **Windows** 7 and higher.
 - **Linux** distributions running under the X Window System.
 
-Requires `Python 3.6`.
+Requires `Python 3.0` or higher.
 
 ## Usage
 Install the [PyPI package](https://pypi.python.org/pypi/pyqo/):

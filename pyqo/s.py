@@ -3,7 +3,7 @@
 """
 ## Command ``s``
 
-Perform a web search with ease. See `s --help` for more details.
+Perform a web search with ease.
 
 ### Example
 

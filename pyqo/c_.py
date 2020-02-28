@@ -33,7 +33,7 @@ from pyqo.utils.json import get_json, resolve_json_filename
 def main():
     """Navigate through directories."""
 
-    parser = argparse.ArgumentParser(description=main.__doc__)
+    parser = argparse.ArgumentParser(prog='c', description=main.__doc__)
     parser.add_argument('key', type=str)
     args = parser.parse_args()
 
@@ -41,12 +41,9 @@ def main():
     values = get_json(filename, [args.key])
 
     if not values:
-        return
-
-    if len(values)<1:
-        print("Key not known, aborting.")
         exit()
-    ret = values[0] if sys.platform in ['linux','linux2'] else '"'+values[0]+'"'
+
+    ret = values[0] if sys.platform in ['linux', 'linux2'] else '"'+values[0]+'"'
     exit(ret)
 
 
