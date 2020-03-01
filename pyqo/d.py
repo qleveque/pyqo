@@ -27,6 +27,7 @@ from subprocess import DEVNULL
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser
+from pyqo.utils.os import os_open
 
 
 def main():
@@ -49,9 +50,8 @@ def main():
         if not dirs:
             return
 
-    cmd = 'xdg-open "{}"' if sys.platform in ['linux', 'linux2'] else 'start "" "{}"'
     for dir_ in dirs:
-        subprocess.call(cmd.format(dir_), shell=True, stderr=DEVNULL, stdout=DEVNULL)
+        os_open(dir_)
 
 
 if __name__ == "__main__":

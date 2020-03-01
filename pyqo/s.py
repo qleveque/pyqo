@@ -23,6 +23,7 @@ from urllib.parse import quote
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser
+from pyqo.utils.os import os_open
 
 
 def main():
@@ -47,8 +48,7 @@ def main():
         return
     url = urls[0].format(quote(args.query))
     
-    cmd = 'xdg-open {}' if sys.platform in ['linux', 'linux2'] else 'start "" "{}"'
-    subprocess.call(cmd.format(url), shell=True, stderr=DEVNULL, stdout=DEVNULL)
+    os_open(url)
 
 
 if __name__ == "__main__":

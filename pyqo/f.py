@@ -24,6 +24,7 @@ from subprocess import DEVNULL
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser
+from pyqo.utils.os import os_open
 
 
 def main():
@@ -40,9 +41,8 @@ def main():
 
     filename = resolve_json_filename(command)
     files = get_json(filename, args.keys)
-    cmd = 'xdg-open {}' if sys.platform in ['linux', 'linux2'] else 'start "" "{}"'
-    for file in files:
-        subprocess.call(cmd.format(file), shell=True, stderr=DEVNULL, stdout=DEVNULL)
+    for file_ in files:
+        os_open(file_)
 
 
 if __name__ == "__main__":

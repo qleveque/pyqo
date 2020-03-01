@@ -43,7 +43,7 @@ def main():
     if not values:
         exit()
 
-    ret = values[0] if sys.platform in ['linux', 'linux2'] else '"'+values[0]+'"'
+    ret = values[0]
     exit(ret)
 
 
