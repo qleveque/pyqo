@@ -28,6 +28,7 @@ import argparse
 import sys
 
 from pyqo.utils.json import get_json, resolve_json_filename
+from pyqo.utils.os import is_wsl, wsl_linux_path 
 
 
 def main():
@@ -44,6 +45,10 @@ def main():
         exit()
 
     ret = values[0]
+
+    if is_wsl():
+        ret = wsl_linux_path(ret)
+
     exit(ret)
 
 

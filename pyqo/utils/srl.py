@@ -10,6 +10,7 @@ import os
 from argparse import ArgumentParser, Namespace
 
 from pyqo.utils.json import resolve_json_filename, set_json, remove_json, list_json, set_config
+from pyqo.utils.os import is_wsl, wsl_windows_path
 
 
 def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -50,12 +51,14 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
     if args.assign is not None:
         assign = args.assign
         if len(keys) != 1:
-            print("When setting a new value, you should provide exactly one key.")
-            exit()
+            exit("When setting a new value, you should provide exactly one key.")
         if file_type:
             assign = resolve_path(assign)
             if len(assign) >= 2 and assign[-2:] in ["\\.", "/."]:
                 assign = assign[:-2]
+            if is_wsl():
+                assign = wsl_windows_path(assign)
+
         set_json(filename, {keys[0]: assign})
         return True
 
