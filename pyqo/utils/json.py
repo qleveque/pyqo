@@ -39,7 +39,6 @@ def set_config(command: str, datafile: str):
     data = read_json(config_file)
     data[key_name] = datafile
     write_json(config_file, data)
-    call_qey()
 
 
 def read_json(filename: str):
@@ -79,7 +78,6 @@ def set_json(filename: str, map_: Dict[str, str]):
     for key, value in map_.items():
         data[key] = value
     write_json(filename, data)
-    call_qey()
 
 
 def remove_json(filename: str, keys: List[str]):
@@ -88,8 +86,3 @@ def remove_json(filename: str, keys: List[str]):
         data.pop(key)
     write_json(filename, data)
 
-
-def call_qey():
-    qey = distutils.spawn.find_executable("qey")
-    if qey is not None:
-        subprocess.Popen([qey, 'start'])
