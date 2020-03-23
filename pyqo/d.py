@@ -27,7 +27,7 @@ from subprocess import DEVNULL
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser
-from pyqo.utils.os import os_open
+from pyqo.utils.os import os_open, is_wsl, wsl_windows_path
 
 
 def main():
@@ -44,6 +44,8 @@ def main():
 
     if not args.keys:
         dirs = [os.getcwd()]
+        if is_wsl():
+            dirs = [wsl_windows_path(dirs[0])]
     else:
         filename = resolve_json_filename(command)
         dirs = get_json(filename, args.keys)
