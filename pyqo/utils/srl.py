@@ -9,7 +9,8 @@ Contains all the functions related to the SRL ("set", "delete" and "list") comma
 import os
 from argparse import ArgumentParser, Namespace
 
-from pyqo.utils.json import resolve_json_filename, set_json, remove_json, list_json, set_config
+from pyqo.utils.json import (resolve_json_filename, set_json, remove_json, list_json, set_config,
+                            get_json)
 from pyqo.utils.os import is_wsl, wsl_windows_path
 
 
@@ -28,6 +29,10 @@ def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
     parser.add_argument('--list',
                         '-l',
                         help='List all the existing keys.',
+                        action='store_true')
+    parser.add_argument('--echo',
+                        '-e',
+                        help='Display the value of the given key.',
                         action='store_true')
     return parser
 
@@ -61,6 +66,16 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
 
         set_json(filename, {keys[0]: assign})
         return True
+
+    if args.echo:
+        if len(keys) != 1:
+            exit("When printing a value, you should provide exactly one key.")
+        values = get_json(filename, keys, False)
+        if len(values) != 1:
+            exit("Unknown key")
+        print(values[0], end='')
+        return True
+
 
     if args.delete:
         remove_json(filename, keys)
