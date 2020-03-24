@@ -11,7 +11,7 @@ from argparse import ArgumentParser, Namespace
 
 from pyqo.utils.json import (resolve_json_filename, set_json, remove_json, list_json, set_config,
                             get_json)
-from pyqo.utils.os import is_wsl, wsl_windows_path
+from pyqo.utils.os import is_wsl, wsl_windows_path, wsl_linux_path
 
 
 def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -26,14 +26,15 @@ def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
     parser.add_argument('-d', '--delete',
                         help='Delete a key.',
                         action='store_true')
-    parser.add_argument('--list',
-                        '-l',
+    parser.add_argument('-l',
+                        '--list',
                         help='List all the existing keys.',
                         action='store_true')
-    parser.add_argument('--echo',
-                        '-e',
+    parser.add_argument('-e',
+                        '--echo',
                         help='Display the value of the given key.',
-                        action='store_true')
+                        action='count',
+                        default=0)
     return parser
 
 
@@ -73,7 +74,10 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
         values = get_json(filename, keys, False)
         if len(values) != 1:
             exit("Unknown key")
-        print(values[0], end='')
+        value = values[0]
+        if args.echo > 1:
+            value = wsl_linux_path(value)
+        print(value, end='')
         return True
 
 
