@@ -81,8 +81,6 @@ def main():
     to_print = []
     for command in commands:
         func = __import__('pyqo.{}'.format(command), fromlist=[command])
-        if command == 'c_':
-            command = 'c'
         func = func.__getattribute__('main')
         to_print.append('> {} : {}'.format(command, func.__doc__))
 

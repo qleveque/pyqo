@@ -44,23 +44,6 @@ Below we briefly describe the different commands of `pyqo`. Make sure to use the
 Generic command to get help. Lists all the commands available.
 
 
-## Command ``d``
-
-Open the file manager to your favourite directories with ease.
-The command `d` shares its data with the command `c`.
-
-### Example
-
-```
-$ cd ~/Documents/games
-$ # open the current working directory, here '~/Documents/games'
-$ d
-$ # associate permanently the key 'films' to '~/Documents/films'
-$ d films -a /home/pyqo/Documents/films
-$ # open '~/Documents/films'
-$ d films
-```
-
 ## Command ``s``
 
 Perform a web search with ease.
@@ -72,6 +55,18 @@ $ # associate permanently the key 'so' to a search on stackoverflow
 $ s so -a https://stackoverflow.com/search?q={}
 $ # perform a search on stackoverflow
 $ s so "what is __init__.py for ?"
+```
+
+## Command ``v``
+Associative table to save small variables.
+### Example
+```
+$ # save the value '+44 1234 123456' under the key 'john_number'
+$ v john_number -a '+44 1234 123456'
+$ # print John's number
+$ v john_number
+$ # forget John's number
+$ v john_number -d
 ```
 
 ## Command ``f``
@@ -89,26 +84,23 @@ $ # open the '~/.bashrc' file
 $ f bashrc
 ```
 
-## Command ``c``
+## Command ``d``
 
-Set the working directory of the command line to your favourite directories with ease.
+Open the file manager to your favourite directories with ease.
+The command ``c`` is also available to ``cd`` into the associated directory.
 For a script to alter the current environment, it requires `source`'ing in linux.
 We suggest you to create an alias to avoid doing it manually : `alias c="source c"`.
-The command `c` shares its data with the command `d`.
-See `c --help` for more details.
 
 ### Example
 
 ```
 $ cd ~/Documents/games
-$ # associate permanently the key 'games' to '~/Documents/games'
-$ d games -a .
+$ # open the current working directory, here '~/Documents/games'
+$ d
 $ # associate permanently the key 'films' to '~/Documents/films'
 $ d films -a /home/pyqo/Documents/films
-$ # equivalent to 'cd ~/Documents/films'
-$ c films
-$ # equivalent to 'cd ~/Documents/games'
-$ c games
+$ # open '~/Documents/films'
+$ d films
 ```
 
 ## Command ``i``
@@ -124,19 +116,4 @@ $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
 $ i so -a https://stackoverflow.com/
 $ # open the two websites on the existing webbrowser window
 $ i github so
-```
-
-## Command ``v``
-
-Associative table to save small variables.
-
-### Example
-
-```
-$ # save the value '+44 1234 123456' under the key 'john_number'
-$ v john_number -a '+44 1234 123456'
-$ # print John's number
-$ v john_number
-$ # forget John's number
-$ v john_number -d
 ```

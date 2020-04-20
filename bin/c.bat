@@ -1,9 +1,9 @@
 @ECHO OFF
-c_ %* 2> %userprofile%\temp
-SET r=%ERRORLEVEL%
+d %* -e > %userprofile%\temp
 SET "VAR="
 SET /p VAR=<%userprofile%\temp
 DEL %userprofile%\temp
-IF "%r%"=="1" (
+SET r=%ERRORLEVEL%
+IF "%r%"=="0" (
 	cd /d "%VAR%"
 )

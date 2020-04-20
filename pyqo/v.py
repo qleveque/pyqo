@@ -1,19 +1,16 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-## Command ``f``
-
-Open your favourite files with ease.
-
+## Command ``v``
+Associative table to save small variables.
 ### Example
-
 ```
-$ cd ~
-$ # associate permanently the key 'bashrc' to the file '~/.bashrc'
-$ f bashrc -a .bashrc
-$ cd ~/Documents/games
-$ # open the '~/.bashrc' file
-$ f bashrc
+$ # save the value '+44 1234 123456' under the key 'john_number'
+$ v john_number -a '+44 1234 123456'
+$ # print John's number
+$ v john_number
+$ # forget John's number
+$ v john_number -d
 ```
 """
 
@@ -21,25 +18,24 @@ import argparse
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser
-from pyqo.utils.os import os_open
 
 
 def main():
-    """Open files."""
+    """Contains variables."""
 
     parser = argparse.ArgumentParser(description=main.__doc__)
     complete_srl_parser(parser)
     parser.add_argument('keys', type=str, nargs='*')
     args = parser.parse_args()
 
-    command = 'f'
-    if handle_srl(command, args, file_type=True):
+    command = 'v'
+    if handle_srl(command, args):
         return
 
     filename = resolve_json_filename(command)
-    files = get_json(filename, args.keys)
-    for file_ in files:
-        os_open(file_)
+    values = get_json(filename, args.keys)
+    for value in values:
+        print(value)
 
 
 if __name__ == "__main__":

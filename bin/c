@@ -1,9 +1,5 @@
 #!/bin/bash
-tmp_file="$HOME/.pyqo"
-c_ $@ 2>$tmp_file
-ret=$?
-if [ $ret -ne 0 ]; then
-  var=$(cat $tmp_file)
-  cd "${var[@]}"
+togo=$(d $1 -e)
+if [ -n "$togo" ]; then
+  cd "$togo"
 fi
-rm $tmp_file

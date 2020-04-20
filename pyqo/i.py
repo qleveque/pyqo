@@ -17,10 +17,7 @@ $ i github so
 ```
 """
 
-import subprocess
-import sys
 import argparse
-from subprocess import DEVNULL
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser

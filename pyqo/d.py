@@ -4,7 +4,9 @@
 ## Command ``d``
 
 Open the file manager to your favourite directories with ease.
-The command `d` shares its data with the command `c`.
+The command ``c`` is also available to ``cd`` into the associated directory.
+For a script to alter the current environment, it requires `source`'ing in linux.
+We suggest you to create an alias to avoid doing it manually : `alias c="source c"`.
 
 ### Example
 
@@ -20,10 +22,7 @@ $ d films
 """
 
 import os
-import subprocess
-import sys
 import argparse
-from subprocess import DEVNULL
 
 from pyqo.utils.json import get_json, resolve_json_filename
 from pyqo.utils.srl import handle_srl, complete_srl_parser

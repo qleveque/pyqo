@@ -11,24 +11,19 @@ from pyqo import __version__
 from pyqo import __author__
 from pyqo import __email__
 
-PYQ_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)),'pyqo')
+with open('requirements.txt','r',encoding = 'utf-8') as f:
+    REQUIREMENTS = f.readlines()
 
-#commands
-def commands():
-    files = os.listdir(PYQ_PATH)
-    pattern = re.compile("^[^_].*.py$")
-    commands = [file[:-3] for file in files if pattern.match(file)]
-    return commands
+PYQ_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pyqo')
+files = os.listdir(PYQ_PATH)
+pattern = re.compile('^[^_].*.py$')
+commands = [file[:-3] for file in files if pattern.match(file)]
+CONSOLE_SCRIPTS = ['{c}=pyqo.{c}:main'.format(c=command) for command in commands]
+SCRIPTS = ['bin/c', 'bin/c.bat']
 
-COMMANDS = commands()
-CONSOLE_SCRIPTS = ['{c}=pyqo.{c}:main'.format(c=command) for command in COMMANDS]
-SCRIPTS = ['bin/c','bin/c.bat']
-
-#readme
 with open('README.md', 'r', encoding = 'utf-8') as f:
     README = '\n'.join(f.readlines())
 
-#setup
 setup(
     name='pyqo',
     version=__version__,
@@ -39,7 +34,7 @@ setup(
     author_email=__email__,
     url='https://github.com/Whenti/pyqo',
     packages = ['pyqo', 'pyqo.utils'],
-    package_dir={'pyqo':'pyqo', 'pyqo.utils':'pyqo/utils'},
+    package_dir={'pyqo': 'pyqo', 'pyqo.utils':'pyqo/utils'},
     include_package_data=True,
     license='Apache License',
     zip_safe=False,
@@ -48,8 +43,9 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
     ],
-    scripts = SCRIPTS,
+    scripts=SCRIPTS,
+    install_requires=REQUIREMENTS,
     entry_points={
         'console_scripts': CONSOLE_SCRIPTS,
-    },
+    }
 )

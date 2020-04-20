@@ -9,8 +9,10 @@ Contains all the functions related to the SRL ("set", "delete" and "list") comma
 import os
 from argparse import ArgumentParser, Namespace
 
+import pyperclip
+
 from pyqo.utils.json import (resolve_json_filename, set_json, remove_json, list_json, set_config,
-                            get_json)
+                             get_json)
 from pyqo.utils.os import is_wsl, wsl_windows_path, wsl_linux_path
 
 
@@ -33,6 +35,11 @@ def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
     parser.add_argument('-e',
                         '--echo',
                         help='Display the value of the given key.',
+                        action='count',
+                        default=0)
+    parser.add_argument('-c',
+                        '--copy',
+                        help='Copy the value of the given key in the clipboard.',
                         action='count',
                         default=0)
     return parser
@@ -68,18 +75,25 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
         set_json(filename, {keys[0]: assign})
         return True
 
-    if args.echo:
-        if len(keys) != 1:
-            exit("When printing a value, you should provide exactly one key.")
-        values = get_json(filename, keys, False)
-        if len(values) != 1:
-            exit("Unknown key")
-        value = values[0]
-        if args.echo > 1:
-            value = wsl_linux_path(value)
-        print(value, end='')
-        return True
+    if args.echo + args.copy:
+        if not len(keys) and command == 'd':
+            value = os.getcwd()
+        elif len(keys) != 1:
+            exit("When printing or copying a value, you should provide exactly one key.")
+        else:
+            values = get_json(filename, keys, False)
+            if len(values) != 1:
+                exit("Unknown key")
+            value = values[0]
 
+        if is_wsl() and args.echo + args.copy == 1:
+            value = wsl_linux_path(value)
+
+        if args.echo:
+            print(value)
+        elif args.copy:
+            pyperclip.copy(value)
+        return True
 
     if args.delete:
         remove_json(filename, keys)
@@ -91,8 +105,7 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
 
     if args.set_datafile is not None:
         if keys:
-            print('Should not provide any key when setting a new datafile')
-            exit()
+            exit('Should not provide any key when setting a new datafile')
         set_config(command, resolve_path(args.set_datafile))
         return True
 

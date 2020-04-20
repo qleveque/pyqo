@@ -15,10 +15,7 @@ $ s so "what is __init__.py for ?"
 ```
 """
 
-import subprocess
-import sys
 import argparse
-from subprocess import DEVNULL
 from urllib.parse import quote
 
 from pyqo.utils.json import get_json, resolve_json_filename
