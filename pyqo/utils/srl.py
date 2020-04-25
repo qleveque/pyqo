@@ -86,7 +86,7 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
                 exit("Unknown key")
             value = values[0]
 
-        if is_wsl() and args.echo + args.copy == 1:
+        if file_type and is_wsl() and args.echo + args.copy == 1:
             value = wsl_linux_path(value)
 
         if args.echo:
