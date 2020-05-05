@@ -78,6 +78,8 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
     if args.echo + args.copy:
         if not len(keys) and command == 'd':
             value = os.getcwd()
+            if is_wsl():
+                value = wsl_windows_path(value)
         elif len(keys) != 1:
             exit("When printing or copying a value, you should provide exactly one key.")
         else:
