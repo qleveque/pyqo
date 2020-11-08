@@ -7,13 +7,23 @@ Contains all the functions related to the SRL ("set", "delete" and "list") comma
 """
 
 import os
+import subprocess
+import sys
 from argparse import ArgumentParser, Namespace
-
-import pyperclip
 
 from pyqo.utils.json import (resolve_json_filename, set_json, remove_json, list_json, set_config,
                              get_json)
 from pyqo.utils.os import is_wsl, wsl_windows_path, wsl_linux_path
+
+
+COPY_PROGRAM = '''
+import pyperclip
+import time
+
+pyperclip.copy('{value}')
+time.sleep(10)
+pyperclip.copy('')
+'''
 
 
 def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
@@ -23,7 +33,7 @@ def complete_srl_parser(parser: ArgumentParser) -> ArgumentParser:
                         type=str)
     parser.add_argument('-s', '--set-datafile',
                         metavar='Datafile',
-                        help='Set the datafile for this command.', 
+                        help='Set the datafile for this command.',
                         type=str)
     parser.add_argument('-d', '--delete',
                         help='Delete a key.',
@@ -94,7 +104,7 @@ def handle_srl(command: str, args: Namespace, file_type: bool = False) -> bool:
         if args.echo:
             print(value)
         elif args.copy:
-            pyperclip.copy(value)
+            subprocess.Popen([sys.executable, '-c', COPY_PROGRAM.format(value=value)])
         return True
 
     if args.delete:
