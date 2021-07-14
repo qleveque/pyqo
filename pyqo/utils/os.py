@@ -5,7 +5,7 @@ from subprocess import call, Popen, DEVNULL, PIPE, STDOUT
 
 def is_wsl():
     return (platform.system()=='Linux' and
-           'microsoft' in platform.uname()[3].lower())
+           'microsoft' in platform.uname().release.lower())
 
 
 def wsl_path(command):
