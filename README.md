@@ -44,6 +44,56 @@ Below we briefly describe the different commands of `pyqo`. Make sure to use the
 Generic command to get help. Lists all the commands available.
 
 
+## Command ``d``
+
+Open the file manager to your favourite directories with ease.
+The command ``c`` is also available to ``cd`` into the associated directory.
+For a script to alter the current environment, it requires `source`'ing in linux.
+We suggest you to create an alias to avoid doing it manually : `alias c="source c"`.
+
+### Example
+
+```
+$ cd ~/Documents/games
+$ # open the current working directory, here '~/Documents/games'
+$ d
+$ # associate permanently the key 'films' to '~/Documents/films'
+$ d films -a /home/pyqo/Documents/films
+$ # open '~/Documents/films'
+$ d films
+```
+
+## Command ``f``
+
+Open your favourite files with ease.
+The command ``ef`` is also available on linux to open the file directly with your favourite editor (```$EDITOR```).
+
+### Example
+
+```
+$ cd ~
+$ # associate permanently the key 'bashrc' to the file '~/.bashrc'
+$ f bashrc -a .bashrc
+$ cd ~/Documents/games
+$ # open the '~/.bashrc' file
+$ f bashrc
+```
+
+## Command ``i``
+
+Open your favourite websites with ease.
+
+### Example
+
+```
+$ # associate permanently the key 'github' to 'http://www.github.com'
+$ i github -a http://www.github.com
+$ # associate permanently the key 'so' to 'https://stackoverflow.com/'
+$ i so -a https://stackoverflow.com/
+$ # open the two websites on the existing webbrowser window
+$ i github so
+```
+
 ## Command ``s``
 
 Perform a web search with ease.
@@ -67,53 +117,4 @@ $ # print John's number
 $ v john_number
 $ # forget John's number
 $ v john_number -d
-```
-
-## Command ``f``
-
-Open your favourite files with ease.
-
-### Example
-
-```
-$ cd ~
-$ # associate permanently the key 'bashrc' to the file '~/.bashrc'
-$ f bashrc -a .bashrc
-$ cd ~/Documents/games
-$ # open the '~/.bashrc' file
-$ f bashrc
-```
-
-## Command ``d``
-
-Open the file manager to your favourite directories with ease.
-The command ``c`` is also available to ``cd`` into the associated directory.
-For a script to alter the current environment, it requires `source`'ing in linux.
-We suggest you to create an alias to avoid doing it manually : `alias c="source c"`.
-
-### Example
-
-```
-$ cd ~/Documents/games
-$ # open the current working directory, here '~/Documents/games'
-$ d
-$ # associate permanently the key 'films' to '~/Documents/films'
-$ d films -a /home/pyqo/Documents/films
-$ # open '~/Documents/films'
-$ d films
-```
-
-## Command ``i``
-
-Open your favourite websites with ease.
-
-### Example
-
-```
-$ # associate permanently the key 'github' to 'http://www.github.com'
-$ i github -a http://www.github.com
-$ # associate permanently the key 'so' to 'https://stackoverflow.com/'
-$ i so -a https://stackoverflow.com/
-$ # open the two websites on the existing webbrowser window
-$ i github so
 ```
