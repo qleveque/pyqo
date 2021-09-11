@@ -1,5 +1,0 @@
-#!/bin/bash
-file=$(f $1 -e)
-if [ -n "$file" ]; then
-  $EDITOR "$file"
-fi

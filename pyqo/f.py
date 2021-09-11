@@ -4,7 +4,6 @@
 ## Command ``f``
 
 Open your favourite files with ease.
-The command ``ef`` is also available on linux to open the file directly with your favourite editor (```$EDITOR```).
 
 ### Example
 

@@ -19,7 +19,7 @@ files = os.listdir(PYQ_PATH)
 pattern = re.compile('^[^_].*.py$')
 commands = [file[:-3] for file in files if pattern.match(file)]
 CONSOLE_SCRIPTS = ['{c}=pyqo.{c}:main'.format(c=command) for command in commands]
-SCRIPTS = ['bin/c', 'bin/c.bat', 'bin/ef']
+SCRIPTS = ['bin/c', 'bin/c.bat']
 
 with open('README.md', 'r', encoding = 'utf-8') as f:
     README = '\n'.join(f.readlines())
