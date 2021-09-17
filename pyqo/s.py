@@ -44,7 +44,7 @@ def main():
     if not urls:
         return
     url = urls[0].format(quote(args.query))
-    
+
     os_open(url)
 
 

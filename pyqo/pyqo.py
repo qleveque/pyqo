@@ -50,14 +50,14 @@ import argparse
 import pyqo
 import os
 
-WELCOME_MESSAGE = """
-Welcome to the wonderful world of                          
-  _ __  _   _  __ _  ___  
- | '_ \| | | |/ _` |/ _ \ 
+WELCOME_MESSAGE = r"""
+Welcome to the wonderful world of
+  _ __  _   _  __ _  ___
+ | '_ \| | | |/ _` |/ _ \
  | |_) | |_| | (_| | (_) |
  | .__/ \__, |\__, |\___/.
- | |     __/ |   | |      
- |_|    |___/    |_|      
+ | |     __/ |   | |
+ |_|    |___/    |_|
 
 `pyqo` is a set of command line tools to improve your productivity.
 It is easy to get use to, and besides it's devilishly effective.
@@ -89,4 +89,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

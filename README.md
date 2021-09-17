@@ -47,9 +47,6 @@ Generic command to get help. Lists all the commands available.
 ## Command ``d``
 
 Open the file manager to your favourite directories with ease.
-The command ``c`` is also available to ``cd`` into the associated directory.
-For a script to alter the current environment, it requires `source`'ing in linux.
-We suggest you to create an alias to avoid doing it manually : `alias c="source c"`.
 
 ### Example
 

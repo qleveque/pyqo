@@ -31,7 +31,7 @@ def os_open(to_open):
     if platform.system()=='Windows':
         cmd = 'start "" "{}"'.format(to_open)
 
-    elif is_wsl(): 
+    elif is_wsl():
         cmd = 'cmd.exe /C start "" "{}"'.format(to_open)
 
     elif platform.system()=='Linux':

@@ -1,5 +1,0 @@
-#!/bin/bash
-togo=$(d $1 -e)
-if [ -n "$togo" ]; then
-  cd "$togo"
-fi
