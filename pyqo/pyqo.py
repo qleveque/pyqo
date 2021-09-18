@@ -14,12 +14,7 @@ Fully compatible with :
 Requires `Python 3.0` or higher.
 
 ## Usage
-Install the [PyPI package](https://pypi.python.org/pypi/pyqo/):
-```
-$ pip install pyqo
-```
-and you're ready to go.
-You can also clone the repository:
+Clone the repository:
 ```
 $ git clone https://github.com/Whenti/pyqo
 ```

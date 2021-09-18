@@ -21,7 +21,7 @@ from pyqo.utils.srl import handle_srl, complete_srl_parser
 
 
 def main():
-    """Contains variables."""
+    """Store variables."""
 
     parser = argparse.ArgumentParser(description=main.__doc__)
     complete_srl_parser(parser)

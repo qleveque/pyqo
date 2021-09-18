@@ -12,12 +12,7 @@ Fully compatible with :
 Requires `Python 3.0` or higher.
 
 ## Usage
-Install the [PyPI package](https://pypi.python.org/pypi/pyqo/):
-```
-$ pip install pyqo
-```
-and you're ready to go.
-You can also clone the repository:
+Clone the repository:
 ```
 $ git clone https://github.com/Whenti/pyqo
 ```
@@ -86,21 +81,8 @@ $ # associate permanently the key 'github' to 'http://www.github.com'
 $ i github -a http://www.github.com
 $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
 $ i so -a https://stackoverflow.com/
-$ # open the two websites on the existing webbrowser window
+$ # open the two websites with your web browser
 $ i github so
-```
-
-## Command ``s``
-
-Perform a web search with ease.
-
-### Example
-
-```
-$ # associate permanently the key 'so' to a search on stackoverflow
-$ s so -a https://stackoverflow.com/search?q={}
-$ # perform a search on stackoverflow
-$ s so "what is __init__.py for ?"
 ```
 
 ## Command ``v``

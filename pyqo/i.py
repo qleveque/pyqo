@@ -12,7 +12,7 @@ $ # associate permanently the key 'github' to 'http://www.github.com'
 $ i github -a http://www.github.com
 $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
 $ i so -a https://stackoverflow.com/
-$ # open the two websites on the existing webbrowser window
+$ # open the two websites with your web browser
 $ i github so
 ```
 """
