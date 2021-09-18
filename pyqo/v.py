@@ -6,35 +6,28 @@ Associative table to save small variables.
 ### Example
 ```
 $ # save the value '+44 1234 123456' under the key 'john_number'
-$ v john_number -a '+44 1234 123456'
+$ pyqo v add john_number '+44 1234 123456'
 $ # print John's number
 $ v john_number
 $ # forget John's number
-$ v john_number -d
+$ pyqo v remove john_number
 ```
 """
 
 import argparse
 
-from pyqo.utils.json import get_json, resolve_json_filename
-from pyqo.utils.srl import handle_srl, complete_srl_parser
+from pyqo.utils.json import get_json
 
 
 def main():
     """Store variables."""
 
     parser = argparse.ArgumentParser(description=main.__doc__)
-    complete_srl_parser(parser)
     parser.add_argument('keys', type=str, nargs='*')
     args = parser.parse_args()
 
-    command = 'v'
-    if handle_srl(command, args):
-        return
-
-    filename = resolve_json_filename(command)
-    values = get_json(filename, args.keys)
-    for value in values:
+    for key in args.keys:
+        value = get_json('v', key)
         print(value)
 
 

@@ -12,7 +12,7 @@ $ cd ~/Documents/games
 $ # open the current working directory, here '~/Documents/games'
 $ d
 $ # associate permanently the key 'films' to '~/Documents/films'
-$ d films -a /home/pyqo/Documents/films
+$ pyqo d add films /home/pyqo/Documents/films
 $ # open '~/Documents/films'
 $ d films
 ```
@@ -21,8 +21,7 @@ $ d films
 import os
 import argparse
 
-from pyqo.utils.json import get_json, resolve_json_filename
-from pyqo.utils.srl import handle_srl, complete_srl_parser
+from pyqo.utils.json import get_json
 from pyqo.utils.os import os_open, is_wsl, wsl_windows_path
 
 
@@ -30,28 +29,19 @@ def main():
     """Open directories."""
 
     parser = argparse.ArgumentParser(description=main.__doc__)
-    complete_srl_parser(parser)
     parser.add_argument('keys', type=str, nargs='*')
     args = parser.parse_args()
 
-    command = 'd'
-    if handle_srl(command, args, file_type=True):
-        return
-
     if not args.keys:
-        dirs = [os.getcwd()]
+        d = os.getcwd()
         if is_wsl():
-            dirs = [wsl_windows_path(dirs[0])]
+            d = wsl_windows_path(d)
+        os_open(d)
     else:
-        filename = resolve_json_filename(command)
-        dirs = get_json(filename, args.keys)
-        if not dirs:
-            return
-
-    for dir_ in dirs:
-        os_open(dir_)
+        dirs = [get_json('d', key) for key in args.keys]
+        for d in dirs:
+            os_open(d)
 
 
 if __name__ == "__main__":
     main()
-

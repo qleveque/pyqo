@@ -38,48 +38,74 @@ Below we briefly describe the different commands of `pyqo`. Make sure to use the
 
 ## Command ``pyqo``
 
-Generic command to get help. Lists all the commands available.
+Generic command: see ``pyqo --help``.
 
 """
 import argparse
-import pyqo
 import os
 
-WELCOME_MESSAGE = r"""
-Welcome to the wonderful world of
-  _ __  _   _  __ _  ___
- | '_ \| | | |/ _` |/ _ \
- | |_) | |_| | (_| | (_) |
- | .__/ \__, |\__, |\___/.
- | |     __/ |   | |
- |_|    |___/    |_|
+import pyperclip
 
-`pyqo` is a set of command line tools to improve your productivity.
-It is easy to get use to, and besides it's devilishly effective.
-`pyqo` includes the following commands:
-{}
-Be sure to use --help in case you need some.
-"""
+import pyqo
+from pyqo.utils.json import get_json, list_json, remove_json, set_json
+from pyqo.utils.os import is_wsl, wsl_windows_path
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-v', '--version',
-                        action='version',
-                        version=pyqo.__version__)
-    parser.parse_args()
-
     path = os.path.dirname(os.path.realpath(__file__))
     files = [f for f in os.listdir(path) if f.endswith('.py')]
     files = [f for f in files if f not in {'__init__.py', 'pyqo.py'}]
     commands = [f[:-3] for f in files]
-    to_print = []
-    for command in commands:
-        func = __import__('pyqo.{}'.format(command), fromlist=[command])
-        func = func.__getattribute__('main')
-        to_print.append('> {} : {}'.format(command, func.__doc__))
 
-    print(WELCOME_MESSAGE.format('\n'.join(to_print)))
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v', '--version',
+                        action='version',
+                        version=pyqo.__version__)
+    parser.add_argument('command', choices=commands, help='Command')
+    sub_parsers = parser.add_subparsers(dest='action', help='Action')
+
+    parser_add = sub_parsers.add_parser('add',
+            help='Assign a value to the given key.')
+    parser_add.add_argument('key')
+    parser_add.add_argument('value')
+
+    parser_remove = sub_parsers.add_parser('remove',
+            help='Delete a key.')
+    parser_remove.add_argument('key')
+
+    parser_show = sub_parsers.add_parser('show',
+            help='Display the value of the given key.')
+    parser_show.add_argument('key')
+
+    parser_copy = sub_parsers.add_parser('copy',
+            help='Copy the value of the given key in the clipboard.')
+    parser_copy.add_argument('key')
+
+    sub_parsers.add_parser('list',
+            help='List all the existing keys.')
+
+    args = parser.parse_args()
+
+    if args.action == 'add':
+        value = args.value
+        if args.command in ['f', 'd']:
+            value = os.path.abspath(value)
+            if is_wsl():
+                value = wsl_windows_path(value)
+        set_json(args.command, args.key, value)
+
+    elif args.action == 'remove':
+        remove_json(args.command, args.key)
+
+    elif args.action == 'show':
+        print(get_json(args.command, args.key))
+
+    elif args.action == 'copy':
+        value = get_json(args.command, args.key)
+        pyperclip.copy(value)
+
+    elif args.action == 'list':
+        list_json(args.command)
 
 
 if __name__ == "__main__":

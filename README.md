@@ -36,7 +36,7 @@ Below we briefly describe the different commands of `pyqo`. Make sure to use the
 
 ## Command ``pyqo``
 
-Generic command to get help. Lists all the commands available.
+Generic command: see ``pyqo --help``.
 
 
 ## Command ``d``
@@ -50,7 +50,7 @@ $ cd ~/Documents/games
 $ # open the current working directory, here '~/Documents/games'
 $ d
 $ # associate permanently the key 'films' to '~/Documents/films'
-$ d films -a /home/pyqo/Documents/films
+$ pyqo d add films /home/pyqo/Documents/films
 $ # open '~/Documents/films'
 $ d films
 ```
@@ -64,7 +64,7 @@ Open your favourite files with ease.
 ```
 $ cd ~
 $ # associate permanently the key 'bashrc' to the file '~/.bashrc'
-$ f bashrc -a .bashrc
+$ pyqo f add bashrc .bashrc
 $ cd ~/Documents/games
 $ # open the '~/.bashrc' file
 $ f bashrc
@@ -78,9 +78,9 @@ Open your favourite websites with ease.
 
 ```
 $ # associate permanently the key 'github' to 'http://www.github.com'
-$ i github -a http://www.github.com
+$ pyqo i add github http://www.github.com
 $ # associate permanently the key 'so' to 'https://stackoverflow.com/'
-$ i so -a https://stackoverflow.com/
+$ pyqo i add so https://stackoverflow.com/
 $ # open the two websites with your web browser
 $ i github so
 ```
@@ -90,9 +90,9 @@ Associative table to save small variables.
 ### Example
 ```
 $ # save the value '+44 1234 123456' under the key 'john_number'
-$ v john_number -a '+44 1234 123456'
+$ pyqo v add john_number '+44 1234 123456'
 $ # print John's number
 $ v john_number
 $ # forget John's number
-$ v john_number -d
+$ pyqo v remove john_number
 ```

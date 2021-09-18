@@ -10,7 +10,7 @@ Open your favourite files with ease.
 ```
 $ cd ~
 $ # associate permanently the key 'bashrc' to the file '~/.bashrc'
-$ f bashrc -a .bashrc
+$ pyqo f add bashrc .bashrc
 $ cd ~/Documents/games
 $ # open the '~/.bashrc' file
 $ f bashrc
@@ -19,8 +19,7 @@ $ f bashrc
 
 import argparse
 
-from pyqo.utils.json import get_json, resolve_json_filename
-from pyqo.utils.srl import handle_srl, complete_srl_parser
+from pyqo.utils.json import get_json
 from pyqo.utils.os import os_open
 
 
@@ -28,18 +27,13 @@ def main():
     """Open files."""
 
     parser = argparse.ArgumentParser(description=main.__doc__)
-    complete_srl_parser(parser)
     parser.add_argument('keys', type=str, nargs='*')
     args = parser.parse_args()
 
-    command = 'f'
-    if handle_srl(command, args, file_type=True):
-        return
+    files = [get_json('f', key) for key in args.keys]
 
-    filename = resolve_json_filename(command)
-    files = get_json(filename, args.keys)
-    for file_ in files:
-        os_open(file_)
+    for f in files:
+        os_open(f)
 
 
 if __name__ == "__main__":

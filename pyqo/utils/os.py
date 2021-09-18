@@ -1,14 +1,12 @@
 import platform
-import os
-from subprocess import call, Popen, DEVNULL, PIPE, STDOUT
+from subprocess import call, Popen, PIPE
 
 
 def is_wsl():
     return (platform.system()=='Linux' and
            'microsoft' in platform.uname().release.lower())
 
-
-def wsl_path(command):
+def popen(command: str):
     proc = Popen(command,
                  shell=True,
                  stdout=PIPE,
@@ -18,27 +16,23 @@ def wsl_path(command):
         exit(stderr.decode('utf-8'))
     return stdout.decode('utf-8').strip()
 
+def wsl_linux_path(path: str):
+    return popen(f'wslpath -a -u "{path}"')
 
-def wsl_linux_path(path):
-    return wsl_path('wslpath -a -u "{}"'.format(path))
+def wsl_windows_path(path: str):
+    return popen(f'wslpath -a -m "{path}"')
 
-
-def wsl_windows_path(path):
-    return wsl_path('wslpath -a -m "{}"'.format(path))
-
-
-def os_open(to_open):
+def os_open(to_open: str):
     if platform.system()=='Windows':
-        cmd = 'start "" "{}"'.format(to_open)
+        cmd = f'start "" "{to_open}"'
 
     elif is_wsl():
-        cmd = 'cmd.exe /C start "" "{}"'.format(to_open)
+        cmd = f'cmd.exe /C start "" "{to_open}"'
 
     elif platform.system()=='Linux':
-        cmd = 'xdg-open "{}"'.format(to_open)
+        cmd = f'xdg-open "{to_open}"'
 
     else:
         exit('Unknown OS. Exiting.')
 
     call(cmd, shell=True)
-
